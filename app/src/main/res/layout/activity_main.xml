@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="40dp"
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="✋ Добро пожаловать!"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textSize="24dp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Войдите, чтобы пользоваться функциями приложения"
+        android:fontFamily="@font/ubuntu_regular"
+        android:textSize="16dp"
+        android:layout_marginBottom="64dp"
+        />
+
+    <TextView
+        android:fontFamily="@font/ubuntu_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вход по e-mail"
+        android:textSize="16dp"
+        />
+
+    <EditText
+        android:background="@drawable/edtxt_email"
+        android:fontFamily="@font/ubuntu_regular"
+        android:hint="example@mail.ru"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="gray"
+        android:paddingHorizontal="20dp"
+        
+        android:inputType="textEmailAddress"
+        />
+
+
+    <Button
+        android:fontFamily="@font/ubuntu_regular"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Далее"
+        />
+
+</LinearLayout>
