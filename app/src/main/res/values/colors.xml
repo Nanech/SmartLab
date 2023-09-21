@@ -3,6 +3,19 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <!-- edtxt email   -->
+
     <color name="stroke">#EBEBEB</color>
     <color name="fill">#F5F5F9</color>
+    
+    <!-- auth fragment -->
+
+    <color name="log_in_uses_email">#7E7E9A</color>
+    <color name="or_log_in">#939396</color>
+    <color name="white50">#80FFFFFF</color>
+
+    <!-- other   -->
+
+    <color name="action_color">#1A6FEE</color>
+    
 </resources>

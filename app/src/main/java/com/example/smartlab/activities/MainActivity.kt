@@ -1,12 +1,34 @@
-package com.example.smartlab
+package com.example.smartlab.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.example.smartlab.R
+import com.example.smartlab.databinding.ActivityMainBinding
+import javax.net.ssl.SSLSessionBindingEvent
+
 
 class MainActivity : AppCompatActivity() {
+
+    // Late init variable for init in onCreate
+    private  lateinit var navController: NavController
+    private  lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        // Sets binding as "activitymain.xml" and runs it
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        setContentView(view)
+
+        // Gets the fragment
+
+        val navHostController = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+        navController = navHostController.navController
+
     }
 }

@@ -3,12 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthFragment">
+    tools:context=".AuthFragment"
+    android:padding="40dp"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✋ Добро пожаловать!"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textSize="24dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Войдите, чтобы пользоваться функциями приложения"
+            android:fontFamily="@font/ubuntu_regular"
+            android:textSize="16dp"
+            android:layout_marginBottom="64dp"
+            />
+
+        <TextView
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Вход по e-mail"
+            android:textColor="@color/log_in_uses_email"
+            android:layout_marginBottom="14dp"
+            android:textSize="16dp"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="example@mail.ru"
+            android:inputType="textEmailAddress"
+            android:textColorHint="@color/black"
+            />
+
+
+        <Button
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:text="Далее"
+            android:layout_width="match_parent"
+            android:background="@drawable/btn"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Или войти с помощью"
+            android:textAlignment="center"
+            android:textColor="@color/or_log_in"
+            android:layout_marginTop="200dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edtxt_email"
+            android:textColor="@color/black"
+            android:text="Войти с Яндекс"
+            android:layout_marginTop="20dp"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>
