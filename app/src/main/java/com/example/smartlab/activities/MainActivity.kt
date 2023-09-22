@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(view)
 
+
         // Starts the navigation
 
         val navHostController = supportFragmentManager
