@@ -44,6 +44,7 @@
             />
 
         <EditText
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="example@mail.ru"
@@ -52,8 +53,11 @@
 
 
         <Button
+            android:id="@+id/btn"
             android:layout_height="50dp"
             android:layout_marginTop="20dp"
+            android:enabled="false"
+            android:background="@drawable/btn_nonenabled"
             android:text="Далее"
             android:layout_width="match_parent"
             />

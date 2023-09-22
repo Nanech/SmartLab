@@ -19,6 +19,7 @@
     <color name="action_color">#1A6FEE</color>
     <color name="edt_txt_color">#7B7B7D</color>
     <color name="clickable_txt">#57A9FF</color>
+    <color name="btn_unenabled">#C9D4FB</color>
 
     
 </resources>
