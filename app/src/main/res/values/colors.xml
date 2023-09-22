@@ -21,5 +21,7 @@
     <color name="clickable_txt">#57A9FF</color>
     <color name="btn_unenabled">#C9D4FB</color>
 
+    <!--  -->
+    <color name="header">#00B712</color>
     
 </resources>

@@ -58,6 +58,7 @@ dependencies {
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.3")
 
     // Onboard Screens
-    
+
+    implementation ("com.airbnb.android:lottie:3.4.0")
 
 }

@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">SmartLab</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="skip_txt">Пропустить</string>
+    <string name="ends_txt">Завершить</string>
+    <string name="header1">Анализы</string>
+    <string name="header2">Уведомления</string>
+    <string name="header3">Мониторинг</string>
+    <string name="desc1">Экспресс сбор и получение проб</string>
+    <string name="desc2">Вы быстро узнаете о результатах</string>
+    <string name="desc3">Наши врачи всегда наблюдают за вашими показателями здоровья</string>
+
 </resources>
