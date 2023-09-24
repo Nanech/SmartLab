@@ -1,7 +1,10 @@
 package com.example.smartlab.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -27,14 +30,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
+
+
         setContentView(view)
 
+        // отсюда не работает
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, OnBoardingActivity::class.java))
+            finish()
+        }, 30)
 
         // Starts the navigation
 
-        val navHostController = supportFragmentManager
-            .findFragmentById(R.id.fragment) as NavHostFragment
-        navController = navHostController.navController
+//        val navHostController = supportFragmentManager
+//            .findFragmentById(R.id.fragment) as NavHostFragment
+//        navController = navHostController.navController
 
     }
 }
