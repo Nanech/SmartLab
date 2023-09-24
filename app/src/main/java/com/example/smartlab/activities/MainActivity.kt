@@ -2,14 +2,10 @@ package com.example.smartlab.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.example.smartlab.AuthFragment
 import com.example.smartlab.R
 import com.example.smartlab.databinding.ActivityMainBinding
-import javax.net.ssl.SSLSessionBindingEvent
 
 
 class MainActivity : AppCompatActivity() {

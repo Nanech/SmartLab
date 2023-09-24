@@ -6,12 +6,7 @@
     app:startDestination="@id/authFragment2">
     <fragment
         android:id="@+id/authFragment2"
-        android:name="com.example.smartlab.AuthFragment"
+        android:name="com.example.smartlab.fragments.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
-    <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.example.smartlab.OnboardingFragment"
-        android:label="fragment_onboarding"
-        tools:layout="@layout/fragment_onboarding" />
 </navigation>
