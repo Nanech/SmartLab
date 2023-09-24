@@ -2,6 +2,7 @@ package com.example.smartlab.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartlab.R
@@ -16,6 +17,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        installSplashScreen()
+
+//        splashScreen.setKeepOnScreenCondition{false}
 
         // Sets binding as "activitymain.xml" and runs it
         binding = ActivityMainBinding.inflate(layoutInflater)

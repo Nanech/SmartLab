@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.smartlab"
-        minSdk = 30
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -34,7 +34,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "31.0.3"
 
     buildFeatures {
         viewBinding = true
@@ -57,8 +57,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
     implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.3")
 
-    // Onboard Screens
+    // Onboard Screens & Splash Screen
 
     implementation ("com.airbnb.android:lottie:3.4.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
 }

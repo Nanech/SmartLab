@@ -32,5 +32,13 @@
     <style name="Theme.Splash" parent="Base.Theme.SmartLab" />
 
 
+    <style name="MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_with_background</item>
+        <item name="windowSplashScreenAnimationDuration">3000</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.SmartLab</item>
+        
+    </style>
+
+
 
 </resources>
