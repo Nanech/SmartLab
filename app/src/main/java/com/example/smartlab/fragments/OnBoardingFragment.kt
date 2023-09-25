@@ -37,7 +37,7 @@ class OnBoardingFragment (val page: OnBoardingPage) : Fragment() {
         binding.headerTitle.text = page.header
         binding.decsTitle.text = page.description
 //        binding.ltAnimations.setAnimation(R.raw.analyzes)
-//        binding.ltAnimations.(page.animation)
+        binding.ltAnimations.setAnimation(page.animation)
 
         return view
     }

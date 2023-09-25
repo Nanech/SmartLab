@@ -9,6 +9,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.databinding.ActivityMainBinding
 
 
@@ -34,10 +35,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(view)
 
-        // отсюда не работает
-
-        startActivity(Intent(this, OnBoardingActivity::class.java))
-
 
 //        Handler(Looper.getMainLooper()).postDelayed({
 //            startActivity(Intent(this, OnBoardingActivity::class.java))
@@ -50,4 +47,18 @@ class MainActivity : AppCompatActivity() {
 //        navController = navHostController.navController
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        isFirstTime()
+    }
+
+    private fun isFirstTime(){
+        val sharedPreferenceManager  = SharedPreferenceManager(this)
+        if (sharedPreferenceManager.isFirstTime){
+            startActivity(Intent(this, OnBoardingActivity::class.java))
+            finish()
+        }
+    }
+
 }

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:fontFamily="@font/ubuntu_regular"
+        android:fontFamily="@font/ubuntu_bold"
         android:onClick="OncClick"
         android:textColor="@color/clickable_txt"
         android:textSize="18sp"
@@ -57,6 +57,7 @@
             app:tabIndicatorHeight="0dp"
             app:tabRippleColor="@null"
             app:tabBackground="@drawable/tab_selector"
+            android:contentDescription="Swiper"
             />
 
 

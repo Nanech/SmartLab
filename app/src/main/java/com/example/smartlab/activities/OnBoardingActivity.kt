@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.adapters.OnBoardingAdapter
 import com.example.smartlab.databinding.ActivityOnBoardingBinding
 import com.example.smartlab.models.OnBoardingPage
@@ -63,7 +64,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding.Skip.setOnClickListener {
             if (onBoardingViewPage2.currentItem < onBoardingViewPage2.adapter!!.itemCount-1){
                 onBoardingViewPage2.currentItem += 1
-            } else {
+            } else if (binding.Skip.text ==  getString(R.string.ends_txt) ) {
                 homeScreenIntent()
             }
         }
@@ -78,7 +79,10 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun homeScreenIntent() {
+        val sharedPreferenceManager = SharedPreferenceManager(this)
+        sharedPreferenceManager.isFirstTime = false
         val homeIntent = Intent(this, MainActivity::class.java)
         startActivity(homeIntent)
+
     }
 }
