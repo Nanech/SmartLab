@@ -36,10 +36,12 @@ class MainActivity : AppCompatActivity() {
 
         // отсюда не работает
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, OnBoardingActivity::class.java))
-            finish()
-        }, 30)
+        startActivity(Intent(this, OnBoardingActivity::class.java))
+
+
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            startActivity(Intent(this, OnBoardingActivity::class.java))
+//        }, 30)
 
         // Starts the navigation
 

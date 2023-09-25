@@ -38,6 +38,7 @@
             android:layout_height="0dp"
             android:minHeight="500dp"
             app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/analyzes"
             app:lottie_loop="true" />
 
     </LinearLayout>

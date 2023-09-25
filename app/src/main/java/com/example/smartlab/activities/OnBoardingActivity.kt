@@ -13,6 +13,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class OnBoardingActivity : AppCompatActivity() {
 
+
+    private lateinit var pagerList:ArrayList<OnBoardingPage>
+
+
+
     lateinit var binding: ActivityOnBoardingBinding
 
 
@@ -30,11 +35,6 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-    private val pagerList = arrayListOf(
-        OnBoardingPage(getString(R.string.header1), getString(R.string.desc1), R.raw.analyzes ),
-        OnBoardingPage(getString(R.string.header2), getString(R.string.desc2), R.raw.notifications ),
-        OnBoardingPage(getString(R.string.header3), getString(R.string.desc3), R.raw.monitoring )
-    )
 
     lateinit var onBoardingViewPage2: ViewPager2
 
@@ -44,6 +44,11 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         val view = binding.root
 
+        pagerList = arrayListOf(
+        OnBoardingPage(getString(R.string.header1), getString(R.string.desc1), R.raw.analyzes ),
+        OnBoardingPage(getString(R.string.header2), getString(R.string.desc2), R.raw.notifications ),
+        OnBoardingPage(getString(R.string.header3), getString(R.string.desc3), R.raw.monitoring)
+        )
         onBoardingViewPage2 = binding.switcher
 
         onBoardingViewPage2.apply {
