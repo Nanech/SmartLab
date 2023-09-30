@@ -8,5 +8,14 @@
         android:id="@+id/authFragment2"
         android:name="com.example.smartlab.fragments.AuthFragment"
         android:label="fragment_auth"
-        tools:layout="@layout/fragment_auth" />
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment2_to_emailCodeFragment"
+            app:destination="@id/emailCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailCodeFragment"
+        android:name="com.example.smartlab.fragments.EmailCodeFragment"
+        android:label="fragment_email_code"
+        tools:layout="@layout/fragment_email_code" />
 </navigation>
