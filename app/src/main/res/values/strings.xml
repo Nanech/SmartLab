@@ -9,6 +9,8 @@
     <string name="desc1">Экспресс сбор и получение проб</string>
     <string name="desc2">Вы быстро узнаете о результатах</string>
     <string name="desc3">Наши врачи всегда наблюдают за вашими показателями здоровья</string>
+
+    <string name="api_root">https://iis.ngknn.ru/NGKNN/МамшеваЮС/MedicMadlab/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
