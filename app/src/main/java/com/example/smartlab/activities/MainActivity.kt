@@ -31,20 +31,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
-
-
         setContentView(view)
 
+//        Starts the navigation
 
-//        Handler(Looper.getMainLooper()).postDelayed({
-//            startActivity(Intent(this, OnBoardingActivity::class.java))
-//        }, 30)
-
-        // Starts the navigation
-
-//        val navHostController = supportFragmentManager
-//            .findFragmentById(R.id.fragment) as NavHostFragment
-//        navController = navHostController.navController
+        val navHostController = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+        navController = navHostController.navController
 
     }
 

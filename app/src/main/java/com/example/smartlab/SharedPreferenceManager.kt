@@ -14,6 +14,16 @@ class SharedPreferenceManager (context: Context) {
 
     private val keyIsFirstTime = "isFirstTime"
 
+    private val email = ""
+
+    var setEmail
+        get() = preference.getString("", email)
+        set(value) {
+            editor.putString(email, value)
+            editor.commit()
+        }
+
+
     var isFirstTime
         get() = preference.getBoolean(keyIsFirstTime, true)
         set(value){

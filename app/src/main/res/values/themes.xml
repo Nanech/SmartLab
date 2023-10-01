@@ -3,6 +3,7 @@
     <style name="Base.Theme.SmartLab" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="buttonStyle">@style/myButton</item>
         <item name="editTextStyle">@style/myEditText</item>
+        <item name="otpViewStyle">@style/MyOtp</item>
 
     </style>
 
@@ -13,6 +14,13 @@
         <item name="android:fontFamily">"@font/ubuntu_bold</item>
         <item name="android:background">@drawable/btn_enabled</item>
 
+    </style>
+
+    <style name="MyOtp" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:cursorVisible">true</item>
+        @style/OtpWidget.OtpView
     </style>
 
     <style name="myEditText" parent="android:style/Widget.EditText">

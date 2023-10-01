@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.EmailCodeFragment"
     android:padding="40dp">
 
@@ -11,11 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <Button
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@drawable/btn_back"
-        />
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_back"
+            android:inputType="none"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +27,7 @@
             android:gravity="center">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:textAlignment="center"
@@ -34,36 +37,25 @@
                 android:textSize="17sp"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <com.mukeshsolanki.OtpView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:inputType="numberPassword"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:inputType="numberPassword"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:inputType="numberPassword"/>
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:inputType="numberPassword"/>
-
-            </LinearLayout>
+                android:clickable="true"
+                android:inputType="number"
+                android:itemBackground="@drawable/edtxt_email"
+                android:maxLength="1"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                app:OtpHideLineWhenFilled="true"
+                app:OtpItemCount="4"
+                app:OtpItemWidth="48dp"
+                app:OtpItemHeight="48dp"
+                app:OtpItemSpacing="16dp"
+                app:OtpLineColor="@android:color/transparent"
+                app:OtpState_filled="true"
+                app:OtpViewType="line" />
 
             <TextView
                 android:layout_marginTop="20dp"
@@ -73,6 +65,7 @@
                 android:text="Отправить код повторно можно будет через 60 секунды"
                 android:textSize="15sp"
                 android:gravity="center"
+                android:layout_marginBottom="50dp"
                 />
 
 

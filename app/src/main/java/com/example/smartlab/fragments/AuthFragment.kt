@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentAuthBinding
 
@@ -22,8 +23,7 @@ class AuthFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // сюда что то из гайда
-//        navController = Navigation.findNavController(R.id.view)
+
     }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +37,10 @@ class AuthFragment : Fragment() {
         binding.btn.setBackgroundResource(R.drawable.btn_nonenabled)
 
         binding.btn.setOnClickListener(){
-            // здесь ссылка на action
+
+            findNavController().navigate(R.id.go_to_email_code)
         }
+
 
 
         return view
