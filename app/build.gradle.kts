@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.ir.backend.js.compile
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -69,6 +71,10 @@ dependencies {
 
     // Otp View
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
+
+    // Pass code view
+
+    implementation("com.github.siczmj:passcodeview:v1.0.1")
 
 
 }

@@ -43,6 +43,7 @@ class EmailCodeFragment : Fragment() {
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
             Toast.makeText( requireContext() , "Entered pin: $it", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.to_create_passcode)
         }
 
 

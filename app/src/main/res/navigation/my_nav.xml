@@ -21,6 +21,18 @@
         <action
             android:id="@+id/back_to_email"
             app:destination="@id/authFragment2" />
+        <action
+            android:id="@+id/to_create_passcode"
+            app:destination="@id/createPassCodeFragment" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/createPassCodeFragment"
+        android:name="com.example.smartlab.fragments.CreatePassCodeFragment"
+        android:label="fragment_create_pass_code"
+        tools:layout="@layout/fragment_create_pass_code" >
+        <action
+            android:id="@+id/action_createPassCodeFragment_to_emailCodeFragment"
+            app:destination="@id/emailCodeFragment" />
     </fragment>
 </navigation>
