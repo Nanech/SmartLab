@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.smartlab"
-        minSdk = 31
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -37,7 +37,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildToolsVersion = "30.0.3"
+    buildToolsVersion = "33.0.1"
 
     buildFeatures {
         viewBinding = true
@@ -72,9 +72,14 @@ dependencies {
     // Otp View
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
 
+//    implementation("com.github.yoanngoular:numpadview:1.0.0")
+
+    // Here error but i need that
+//    implementation("com.github.wRorsjakz:Android-NumPad:1.0.1")
+
     // Pass code view
 
-    implementation("com.github.siczmj:passcodeview:v1.0.1")
+//    implementation("com.github.siczmj:passcodeview:v1.0.1")
 
 
 }

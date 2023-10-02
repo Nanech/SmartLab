@@ -8,24 +8,85 @@
     tools:context=".fragments.CreatePassCodeFragment">
 
 
-    <com.mukeshsolanki.OtpView
-        android:id="@+id/otp_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:inputType="numberPassword"
-        android:itemBackground="@drawable/edtxt_email"
-        android:maxLength="1"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        app:OtpHideLineWhenFilled="true"
-        app:OtpItemCount="4"
-        app:OtpItemWidth="48dp"
-        app:OtpItemHeight="48dp"
-        app:OtpItemSpacing="16dp"
-        app:OtpLineColor="@android:color/transparent"
-        app:OtpState_filled="true"
-        app:OtpViewType="line" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40dp">
+
+
+        <TextView
+            android:id="@+id/Skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:fontFamily="@font/ubuntu_bold"
+            android:onClick="OncClick"
+            android:text="@string/skip_txt"
+            android:textColor="@color/clickable_txt"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Skip">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="Создайте пароль"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Для защиты ваших персональных данных"
+                android:textSize="15sp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:layout_marginTop="16dp"
+                />
+
+
+
+
+            <com.mukeshsolanki.OtpView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:inputType="numberPassword"
+                android:itemBackground="@drawable/tab_selector"
+                android:maxLength="1"
+                app:OtpHideLineWhenFilled="true"
+                app:OtpItemCount="4"
+                app:OtpItemHeight="48dp"
+                app:OtpItemSpacing="16dp"
+                app:OtpItemWidth="48dp"
+                app:OtpLineColor="@android:color/transparent"
+                app:OtpState_filled="true"
+                app:OtpViewType="line"
+                android:layout_marginTop="56dp"
+                />
+
+
+
+
+
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 
