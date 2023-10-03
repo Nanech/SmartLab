@@ -72,14 +72,14 @@ dependencies {
     // Otp View
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
 
-//    implementation("com.github.yoanngoular:numpadview:1.0.0")
+
 
     // Here error but i need that
-//    implementation("com.github.wRorsjakz:Android-NumPad:1.0.1")
+//    implementation("com.github.yoanngoular:numpadview:1.0.0")
 
     // Pass code view
 
-//    implementation("com.github.siczmj:passcodeview:v1.0.1")
+    implementation("com.github.siczmj:passcodeview:v1.0.1")
 
 
 }

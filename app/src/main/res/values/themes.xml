@@ -7,6 +7,39 @@
 
     </style>
 
+    <!-- Fragment Created pass code   -->
+    <!-- Fragment Created pass code   -->
+    <!-- Fragment Created pass code   -->
+
+    <style name="MyNumpad" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="buttonStyle">@style/FragPassCodeBtns</item>
+        <item name="otpViewStyle">@style/myOtpPassword</item>
+
+    </style>
+
+    <style name="FragPassCodeBtns" parent="Widget.AppCompat.Button">
+
+        <item name="android:height">80dp</item>
+        <item name="android:width">80dp</item>
+        <item name="android:background">@drawable/btns_numpad</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+        <item name="android:textSize">24dp</item>
+        <item name="textAllCaps">true</item>
+
+    </style>
+
+    <style name="myOtpPassword" parent="Widget.AppCompat.EditText">
+        <item name="android:maxLength">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/action_color</item>
+    </style>
+
+    <!--  Default theme for edtText and Butns   -->
+    <!--  Default theme for edtText and Butns   -->
+    <!--  Default theme for edtText and Butns   -->
+
     <style name="myButton" parent="Widget.AppCompat.Button">
 
         <item name="android:textColor">@color/white</item>
@@ -24,21 +57,21 @@
     </style>
 
     <style name="myEditText" parent="android:style/Widget.EditText">
-
         <item name="textAllCaps">false</item>
         <item name="android:lines">1</item>
         <item name="android:paddingHorizontal">20dp</item>
         <item name="android:fontFamily">@font/ubuntu_regular</item>
         <item name="android:background">@drawable/edtxt_email</item>
         <item name="android:textColorHint">@color/edt_txt_color</item>
-
     </style>
 
     <style name="Theme.SmartLab" parent="Base.Theme.SmartLab" />
-
-
     <style name="Theme.Splash" parent="Base.Theme.SmartLab" />
 
+
+    <!--Splash Screen-->
+    <!--Splash Screen-->
+    <!--Splash Screen-->
 
     <style name="MySplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/logo_with_background</item>

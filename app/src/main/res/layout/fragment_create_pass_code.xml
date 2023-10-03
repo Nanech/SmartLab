@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/MyNumpad"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     tools:context=".fragments.CreatePassCodeFragment">
 
 
@@ -57,17 +57,16 @@
                 />
 
 
-
-
             <com.mukeshsolanki.OtpView
                 android:id="@+id/otp_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:inputType="numberPassword"
-                android:itemBackground="@drawable/tab_selector"
-                android:maxLength="1"
+                android:itemBackground="@drawable/selectr_passcode"
                 app:OtpHideLineWhenFilled="true"
+                android:inputType="textPassword"
+                android:focusableInTouchMode="true"
+                android:focusable="false"
+                app:OtpLineWidth="0dp"
                 app:OtpItemCount="4"
                 app:OtpItemHeight="48dp"
                 app:OtpItemSpacing="16dp"
@@ -75,8 +74,38 @@
                 app:OtpLineColor="@android:color/transparent"
                 app:OtpState_filled="true"
                 app:OtpViewType="line"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="30dp"
                 />
+
+
+            <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:useDefaultMargins="true"
+                android:layout_marginTop="40dp"
+                >
+
+            <!--  funOnClickTrouble?              -->
+
+                <Button android:id="@+id/btn1" android:text="1" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn2" android:text="2" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn3" android:text="3" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn4" android:text="4" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn5" android:text="5" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn6" android:text="6" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn7" android:text="7" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn8" android:text="8" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn9" android:text="9" android:onClick="funOnClick" />
+                <Button android:id="@+id/btn0" android:text="0" android:onClick="funOnClick"
+                    android:layout_column="1"/>
+                <Button android:id="@+id/btnDel" android:text="Del"  android:onClick="funOnClick"
+                    android:layout_column="2"/>
+
+            </GridLayout>
 
 
 
