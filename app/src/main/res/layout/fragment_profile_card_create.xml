@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileCardCreateFragment">
+    tools:context=".fragments.ProfileCardCreateFragment"
+    android:theme="@style/ProfileCard"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="32dp"
                 android:text="В картах пациентов будут храниться результаты анализов вас и ваших близких."
                 android:textSize="14sp"/>
 
@@ -86,6 +89,7 @@
                 android:id="@+id/middle_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="24dp"
                 android:hint="Отчетсво"
                 android:inputType="text"
                 />
@@ -94,6 +98,7 @@
                 android:id="@+id/surname"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="24dp"
                 android:hint="Фамилия"
                 android:inputType="text"
                 />
@@ -102,6 +107,8 @@
                 android:id="@+id/gender"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+
                 android:hint="Пол"
                 />
 
