@@ -34,5 +34,17 @@
         <action
             android:id="@+id/action_createPassCodeFragment_to_emailCodeFragment"
             app:destination="@id/emailCodeFragment" />
+        <action
+            android:id="@+id/action_createPassCodeFragment_to_profileCardCreateFragment"
+            app:destination="@id/profileCardCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileCardCreateFragment"
+        android:name="com.example.smartlab.fragments.ProfileCardCreateFragment"
+        android:label="fragment_profile_card_create"
+        tools:layout="@layout/fragment_profile_card_create" >
+        <action
+            android:id="@+id/action_profileCardCreateFragment_to_createPassCodeFragment"
+            app:destination="@id/createPassCodeFragment" />
     </fragment>
 </navigation>
