@@ -74,12 +74,4 @@ dependencies {
 
 
 
-    // Here error but i need that
-//    implementation("com.github.yoanngoular:numpadview:1.0.0")
-
-    // Pass code view
-
-    implementation("com.github.siczmj:passcodeview:v1.0.1")
-
-
 }
