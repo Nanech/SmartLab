@@ -44,9 +44,10 @@ class CreatePassCodeFragment : Fragment() {
 
         binding.passcodeView.setOtpCompletionListener {
             Toast.makeText(requireContext(), binding.passcodeView.text, Toast.LENGTH_LONG ).show()
+            // Need to add to Preference Manager
         }
 
-//        funOnClick(inflater.inflate(R.layout.fragment_create_pass_code, container, false))
+
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
 
         return view
