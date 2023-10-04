@@ -5,9 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
-import com.example.smartlab.databinding.FragmentEmailCodeBinding
 
 
 class CreatePassCodeFragment : Fragment() {
@@ -29,51 +30,51 @@ class CreatePassCodeFragment : Fragment() {
 
         // ломается почему то
 
+        binding.btn0.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn1.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn2.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn3.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn4.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn5.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn6.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn7.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn8.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn9.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btnDel.setOnClickListener { removeLastCharter() }
+
+        binding.passcodeView.setOtpCompletionListener {
+            Toast.makeText(requireContext(), binding.passcodeView.text, Toast.LENGTH_LONG ).show()
+        }
+
+//        funOnClick(inflater.inflate(R.layout.fragment_create_pass_code, container, false))
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
 
         return view
     }
 
-    fun funOnClick(view: View) {
-        binding.apply {
-            val text = otpView.text.toString().trim()
-            when(view.id){
-                in listOf(R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
-                R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9) ->{
-                    val number = when(view.id){
-                        R.id.btn0 -> "0"
-                        R.id.btn1 -> "1"
-                        R.id.btn2 -> "2"
-                        R.id.btn3 -> "3"
-                        R.id.btn4 -> "4"
-                        R.id.btn5 -> "5"
-                        R.id.btn6 -> "6"
-                        R.id.btn7 -> "7"
-                        R.id.btn8 -> "8"
-                        R.id.btn9 -> "9"
-                        else -> ""
-                    }
-                    binding.otpView.text?.append(number)
-                }
-                R.id.btnDel -> {
-                    if (otpView.text!!.isNotEmpty()){
-                        removeLastCharter()
-                    }
-                }
-            }
-        }
 
-    }
 
     private fun removeLastCharter(){
-        val text = binding.otpView.text.toString()
+        val text = binding.passcodeView.text.toString()
         if (text.isNotEmpty()){
             val newText = text.substring(0, text.length-1)
-            binding.otpView.setText(newText)
-            binding.otpView.setSelection(newText.length)
+            binding.passcodeView.setText(newText)
+            binding.passcodeView.setSelection(newText.length)
         }
-
     }
+
+
+    fun hadleButtonClick(view: View){
+        with(view as Button){
+            var numb = "$text"
+            writeIntoEdtTxt(numb)
+        }
+    }
+
+    fun writeIntoEdtTxt(number: String ){
+        binding.passcodeView.text?.append(number)
+    }
+
 
 
 
