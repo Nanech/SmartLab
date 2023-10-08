@@ -1,6 +1,7 @@
 package com.example.smartlab.fragments
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
+import java.util.concurrent.TimeUnit
 
 
 class CreatePassCodeFragment : Fragment() {
@@ -16,6 +18,7 @@ class CreatePassCodeFragment : Fragment() {
 
     private var _binding: FragmentCreatePassCodeBinding? = null
     private val binding get() =  _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +29,25 @@ class CreatePassCodeFragment : Fragment() {
 
         _binding = FragmentCreatePassCodeBinding.inflate(inflater, container, false)
 
-        var view = binding.root
+        val view = binding.root
 
-        // ломается почему то
-
-        binding.btn0.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn1.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn2.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn3.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn4.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn5.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn6.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn7.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn8.setOnClickListener{ view -> hadleButtonClick(view) }
-        binding.btn9.setOnClickListener{ view -> hadleButtonClick(view) }
+        binding.btn0.setOnClickListener(::hadleButtonClick)
+        binding.btn1.setOnClickListener(::hadleButtonClick )
+        binding.btn2.setOnClickListener(::hadleButtonClick )
+        binding.btn3.setOnClickListener(::hadleButtonClick )
+        binding.btn4.setOnClickListener(::hadleButtonClick )
+        binding.btn5.setOnClickListener(::hadleButtonClick )
+        binding.btn6.setOnClickListener(::hadleButtonClick )
+        binding.btn7.setOnClickListener(::hadleButtonClick )
+        binding.btn8.setOnClickListener(::hadleButtonClick )
+        binding.btn9.setOnClickListener(::hadleButtonClick )
         binding.btnDel.setOnClickListener { removeLastCharter() }
 
         binding.passcodeView.setOtpCompletionListener {
             Toast.makeText(requireContext(), binding.passcodeView.text, Toast.LENGTH_LONG ).show()
             // Need to add to Preference Manager
         }
+
 
 
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
@@ -65,7 +67,7 @@ class CreatePassCodeFragment : Fragment() {
     }
 
 
-    fun hadleButtonClick(view: View){
+    private fun hadleButtonClick(view: View){
         with(view as Button){
             var numb = "$text"
             writeIntoEdtTxt(numb)

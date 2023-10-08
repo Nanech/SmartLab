@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SmartLab</string>
 
+    <!--    On Boarding Fragments-->
     <string name="skip_txt">Пропустить</string>
     <string name="ends_txt">Завершить</string>
     <string name="header1">Анализы</string>
@@ -11,6 +12,8 @@
     <string name="desc3">Наши врачи всегда наблюдают за вашими показателями здоровья</string>
 
     <string name="api_root">https://iis.ngknn.ru/NGKNN/МамшеваЮС/MedicMadlab/</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
