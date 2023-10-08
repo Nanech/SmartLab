@@ -1,5 +1,6 @@
 package com.example.smartlab.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
 import java.util.concurrent.TimeUnit
@@ -69,6 +71,7 @@ class CreatePassCodeFragment : Fragment() {
 
     private fun hadleButtonClick(view: View){
         with(view as Button){
+            var btn = view.id
             var numb = "$text"
             writeIntoEdtTxt(numb)
         }

@@ -98,7 +98,4 @@ class EmailCodeFragment : Fragment() {
     }
 
 
-
-
-
 }
