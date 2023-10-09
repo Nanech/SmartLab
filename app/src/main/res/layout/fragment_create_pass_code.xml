@@ -90,7 +90,7 @@
                 android:layout_marginTop="40dp"
                 >
 
-                <Button android:id="@+id/btn1"  android:text="1" />
+                <Button android:id="@+id/btn1"  android:text="1"  />
                 <Button android:id="@+id/btn2" android:text="2" />
                 <Button android:id="@+id/btn3" android:text="3" />
                 <Button android:id="@+id/btn4" android:text="4" />

@@ -70,6 +70,38 @@ class CreatePassCodeFragment : Fragment() {
 
 
     private fun hadleButtonClick(view: View){
+
+//        binding.apply {
+//            val text = passcodeView.text.toString().trim()
+//            when (view.id) {
+//                in listOf(
+//                    R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
+//                    R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9
+//                ) -> {
+//                    val number = when (view.id) {
+//                        binding.btn0.id -> "0"
+//                        binding.btn1.id-> "1"
+//                        binding.btn2.id -> "2"
+//                        binding.btn3.id -> "3"
+//                        binding.btn4.id -> "4"
+//                        binding.btn5.id -> "5"
+//                        binding.btn6.id -> "6"
+//                        binding.btn7.id -> "7"
+//                        binding.btn8.id -> "8"
+//                        binding.btn9.id -> "9"
+//                        else -> ""
+//                    }
+//                    binding.passcodeView.text?.append(number)
+//                }
+//
+//                R.id.btnDel -> {
+//                    if (passcodeView.text!!.isNotEmpty()) {
+//                        removeLastCharter()
+//                    }
+//                }
+//            }
+//        }
+
         with(view as Button){
             var btn = view.id
             var numb = "$text"

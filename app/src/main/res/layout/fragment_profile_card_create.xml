@@ -108,8 +108,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="24dp"
-
-                android:hint="Пол"
+                android:background="@drawable/edtxt_email"
+                android:paddingHorizontal="20dp"
+                tools:listitem=""
                 />
 
             <Button
