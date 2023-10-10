@@ -41,23 +41,13 @@ class ProfileCardCreateFragment : Fragment() {
         var arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, genders)
         binding.autoComplete.setAdapter(arrayAdapter)
 
-        // Зачем то он пихает hint хотя я ему анимации обрубил и вот здесь делаю
-
-        binding.autoComplete.setOnItemClickListener { adapterView, view, i, l ->
-            var textFromHint = binding.inptLayout.hint
-
-            if( textFromHint != null ) {
-                binding.inptLayout.hint  = null
-            } else{
-                binding.inptLayout.hint  =  "Пол"
-            }
-        }
+        // Немного некорректно но сойдёт
 
         binding.autoComplete.setOnClickListener{
 
             var textFromHint = binding.inptLayout.hint
 
-            if( textFromHint != null ) {
+            if( textFromHint != null || binding.autoComplete.text.isNotEmpty()  ) {
                 binding.inptLayout.hint  = null
             } else{
                 binding.inptLayout.hint  =  "Пол"
