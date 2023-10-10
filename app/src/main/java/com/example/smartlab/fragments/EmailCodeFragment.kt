@@ -74,6 +74,11 @@ class EmailCodeFragment : Fragment() {
         return view
     }
 
+    fun SendEmail(){
+
+    }
+
+
     override fun onStart() {
         super.onStart()
         timer.start()

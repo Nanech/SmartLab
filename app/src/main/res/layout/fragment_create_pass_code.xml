@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:theme="@style/MyNumpad"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.CreatePassCodeFragment">
+    tools:context=".fragments.CreatePassCodeFragment"
+
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +66,7 @@
                 android:itemBackground="@drawable/selectr_passcode"
                 app:OtpHideLineWhenFilled="true"
                 android:inputType="textPassword"
+                android:textColor="@color/action_color"
                 android:focusableInTouchMode="false"
                 android:maxLength="4"
                 android:focusable="false"
@@ -105,6 +108,8 @@
             </GridLayout>
 
         </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

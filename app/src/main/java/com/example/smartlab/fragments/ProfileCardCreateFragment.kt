@@ -1,5 +1,4 @@
 package com.example.smartlab.fragments
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -19,7 +18,6 @@ class ProfileCardCreateFragment : Fragment() {
     private var _binding: FragmentProfileCardCreateBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var spinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,49 +34,38 @@ class ProfileCardCreateFragment : Fragment() {
 
 //        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
-        spinner = binding.gender
-
-        val listItems = listOf("Мужской", "Женский", "Иное")
-
-        val arrayAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item,
-            listItems)
-
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = arrayAdapter
-
-        // There may trouble "https://www.youtube.com/watch?v=JDbsuACIoQE"
 
 
-        // Better one https://www.youtube.com/watch?v=741l_fPKL3Y
 
+        val genders = resources.getStringArray(R.array.gender)
+        var arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, genders)
+        binding.autoComplete.setAdapter(arrayAdapter)
 
-        spinner.onItemClickListener = object: AdapterView.OnItemSelectedListener,
-            AdapterView.OnItemClickListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), "Selected $selectedItem", Toast.LENGTH_SHORT )
+        // Зачем то он пихает hint хотя я ему анимации обрубил и вот здесь делаю
+
+        binding.autoComplete.setOnItemClickListener { adapterView, view, i, l ->
+            var textFromHint = binding.inptLayout.hint
+
+            if( textFromHint != null ) {
+                binding.inptLayout.hint  = null
+            } else{
+                binding.inptLayout.hint  =  "Пол"
             }
+        }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+        binding.autoComplete.setOnClickListener{
 
+            var textFromHint = binding.inptLayout.hint
+
+            if( textFromHint != null ) {
+                binding.inptLayout.hint  = null
+            } else{
+                binding.inptLayout.hint  =  "Пол"
             }
-
-            override fun onItemClick(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                TODO("Not yet implemented")
-            }
-
 
         }
+
+
 
 
         return view

@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ProfileCardCreateFragment"
     android:theme="@style/ProfileCard"
+
     >
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,10 +43,9 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:fontFamily="@font/ubuntu_bold"
-                android:onClick="OncClick"
                 android:text="@string/skip_txt"
                 android:textColor="@color/clickable_txt"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -103,15 +104,41 @@
                 android:inputType="text"
                 />
 
-            <Spinner
-                android:id="@+id/gender"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inptLayout"
+                android:theme="@style/myDropDownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/edtxt_email"
-                android:paddingHorizontal="20dp"
-                tools:listitem=""
-                />
+                android:padding="0dp"
+                android:layout_marginBottom="0dp"
+                app:boxBackgroundColor="@android:color/transparent"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:textColorHint="@color/edt_txt_color"
+                android:fontFamily="@font/ubuntu_regular"
+                app:hintAnimationEnabled="false"
+                android:maxLines="1"
+                android:inputType="none"
+                android:focusable="false"
+                android:hint="Пол"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/edtxt_email"
+                    android:maxLines="1"
+                    android:inputType="none"
+                    android:focusable="false"
+                    app:hintAnimationEnabled="false"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btn"

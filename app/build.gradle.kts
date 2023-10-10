@@ -72,6 +72,11 @@ dependencies {
     // Otp View
     implementation("com.github.mukeshsolanki.android-otpview-pinview:otpview:3.1.0")
 
+    // Serialization JSONP into JSON
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+
+    // HTTP Client
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 
 
 }

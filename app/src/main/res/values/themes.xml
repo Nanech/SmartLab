@@ -12,9 +12,16 @@
     <!--  Card Create   -->
     <!--  Card Create   -->
 
-    <style name="ProfileCard" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ProfileCard" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="editTextStyle">@style/cardEditText</item>
         <item name="buttonStyle">@style/myButton</item>
+
+    </style>
+
+    <style name="myDropDownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:textColorHint">@color/edt_txt_color</item>
+        <item name="hintTextColor">@color/edt_txt_color</item>
+
 
     </style>
 
@@ -34,10 +41,7 @@
     <!-- Fragment Created pass code   -->
 
     <style name="MyNumpad" parent="Theme.AppCompat.Light.NoActionBar">
-
         <item name="buttonStyle">@style/FragPassCodeBtns</item>
-        <item name="otpViewStyle">@style/myOtpPassword</item>
-
     </style>
 
     <style name="FragPassCodeBtns" parent="Widget.AppCompat.Button">

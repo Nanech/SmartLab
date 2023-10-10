@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
 import java.util.concurrent.TimeUnit
@@ -50,7 +51,9 @@ class CreatePassCodeFragment : Fragment() {
             // Need to add to Preference Manager
         }
 
-        hadleButtonClick(view)
+        binding.Skip.setOnClickListener {
+            findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
+        }
 
 
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
