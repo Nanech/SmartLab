@@ -1,10 +1,12 @@
 package com.example.smartlab.fragments
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +17,21 @@ import androidx.core.content.getSystemService
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
+import com.example.smartlab.adapters.MyAPI
 import com.example.smartlab.databinding.FragmentEmailCodeBinding
+import com.google.gson.GsonBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.await
+import retrofit2.awaitResponse
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.lang.Exception
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -75,6 +91,32 @@ class EmailCodeFragment : Fragment() {
     }
 
     fun SendEmail(){
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+            .addInterceptor(interceptor).build()
+
+        val gsonBuilder = GsonBuilder()
+            .setLenient().create()
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+            .baseUrl(getString(R.string.api_root))
+            .client(httpClient).build()
+
+        val requestApi = retrofit.create(MyAPI::class.java )
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                requestApi.postEmail(binding.emailText.text.toString())
+                    .awaitResponse()
+                Log.d("Response", "Success send email")
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, e.toString())
+            }
+
+        }
 
     }
 
