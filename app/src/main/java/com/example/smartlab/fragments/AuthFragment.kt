@@ -2,6 +2,7 @@ package com.example.smartlab.fragments
 
 import android.content.ContentValues
 import android.os.Bundle
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -49,10 +50,12 @@ class AuthFragment : Fragment() {
 
         emailFocusListener()
 
+
+
         binding.btn.setBackgroundResource(R.drawable.btn_nonenabled)
 
         binding.btn.setOnClickListener(){
-            sendEmail()
+            sendEmail(binding.edEmail.text.toString())
 
             val action = AuthFragmentDirections.goToEmailCode(binding.edEmail.text.toString())
 
@@ -85,7 +88,7 @@ class AuthFragment : Fragment() {
         } )
     }
 
-    fun sendEmail(){
+    fun sendEmail(email: String){
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -101,17 +104,17 @@ class AuthFragment : Fragment() {
             .baseUrl(getString(R.string.api_root))
             .client(httpClient).build()
 
+
         val requestApi = retrofit.create(MyAPI::class.java )
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                requestApi.postEmail(binding.edEmail.text.toString())
+                requestApi.postEmail(email)
                     .awaitResponse()
                 Log.d("Response", "Success send email")
             } catch (e: Exception) {
                 Log.d(ContentValues.TAG, e.toString())
             }
         }
-
     }
 
 

@@ -14,12 +14,12 @@ class SharedPreferenceManager (context: Context) {
 
     private val keyIsFirstTime = "isFirstTime"
 
-    private val email = ""
+    private val passCode = ""
 
-    var setEmail
-        get() = preference.getString("", email)
+    var setPassCode
+        get() = preference.getString(passCode, "")
         set(value) {
-            editor.putString(email, value)
+            editor.putString(passCode, value)
             editor.commit()
         }
 

@@ -31,8 +31,6 @@ class OnBoardingActivity : AppCompatActivity() {
                 2 -> {binding.Skip.text = getString(R.string.ends_txt)}
                 else -> {binding.Skip.text = getString(R.string.ends_txt) }
             }
-
-
         }
     }
 

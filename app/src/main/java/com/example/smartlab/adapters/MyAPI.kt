@@ -13,6 +13,6 @@ interface MyAPI {
     fun postEmail(@Header("User-email") email: String ): Call<String>
 
     @POST("api/SignIn")
-    fun signIn(@Header("User-email") email: String, @Header("User-code") code: String) :Call<String>
+    fun postSignIn(@Header("User-email") email: String, @Header("User-code") code: String) :Call<String>
 
 }

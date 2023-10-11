@@ -60,7 +60,7 @@ class EmailCodeFragment : Fragment() {
         val view = binding.root
 
         val myEmail = args.email // Taken my email from previous fragment
-        Toast.makeText(requireContext(), "Sent email - $myEmail", Toast.LENGTH_LONG).show()
+
 
         binding.btnBack.setOnClickListener{
             findNavController().navigate(R.id.back_to_email)
@@ -69,7 +69,12 @@ class EmailCodeFragment : Fragment() {
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
             Toast.makeText( requireContext() , "Entered pin: $it", Toast.LENGTH_SHORT).show()
+//            sendEmailAndCode(myEmail)
+
             findNavController().navigate(R.id.to_create_passcode)
+
+            // Needs to Validate
+
         }
 
         var duration = TimeUnit.MINUTES.toMillis(1);
@@ -84,6 +89,8 @@ class EmailCodeFragment : Fragment() {
             override fun onFinish() {
                binding.emailText.isClickable = true
                binding.emailText.text = "Нажмите, чтобы отправить код"
+               sendEmail(myEmail)
+               binding.emailText.isClickable = false
                // Здесь код для повторной отправки сообщения после которого emailText.isClickable = false
             }
 
@@ -95,7 +102,7 @@ class EmailCodeFragment : Fragment() {
         return view
     }
 
-    fun sendEmail(){
+    fun sendEmail(email: String){
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -114,9 +121,51 @@ class EmailCodeFragment : Fragment() {
         val requestApi = retrofit.create(MyAPI::class.java )
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                requestApi.postEmail(binding.emailText.text.toString())
+                requestApi.postEmail(email)
                     .awaitResponse()
                 Log.d("Response", "Success send email")
+            } catch (e: Exception) {
+                Log.d(ContentValues.TAG, e.toString())
+            }
+        }
+    }
+
+    fun sendEmailAndCode(myEmail: String){
+
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+            .addInterceptor(interceptor).build()
+
+        val gsonBuilder = GsonBuilder()
+            .setLenient().create()
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+            .baseUrl(getString(R.string.api_root))
+            .client(httpClient).build()
+
+        val requestApi = retrofit.create(MyAPI::class.java )
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = requestApi.postSignIn( myEmail, binding.otpView.text.toString() )
+                    .awaitResponse()
+
+                if (response.isSuccessful) {
+                    val data = response.body()!! // Take JWT token
+                    // Needs to put in Preference Manager
+
+                }else{
+                    Toast.makeText(requireContext(), "Код введён не верно или не " +
+                            "верно указана почта", Toast.LENGTH_SHORT).show();
+
+                    sendEmail(myEmail)
+
+                    binding.otpView.text = null
+                }
+
             } catch (e: Exception) {
                 Log.d(ContentValues.TAG, e.toString())
             }
@@ -136,13 +185,9 @@ class EmailCodeFragment : Fragment() {
         timer.cancel()
     }
 
-    fun Fragment.hideKeyboard() {
-        view?.let { activity?.hideKeyboard(it) }
-    }
+    fun Fragment.hideKeyboard() { view?.let { activity?.hideKeyboard(it) } }
 
-    fun Activity.hideKeyboard() {
-        hideKeyboard(currentFocus ?: View(this))
-    }
+    fun Activity.hideKeyboard() { hideKeyboard(currentFocus ?: View(this))   }
 
     fun Context.hideKeyboard(view: View) {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
