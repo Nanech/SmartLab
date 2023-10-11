@@ -14,7 +14,7 @@ class SharedPreferenceManager (context: Context) {
 
     private val keyIsFirstTime = "isFirstTime"
 
-    private val passCode = ""
+    private var passCode = ""
 
     var setPassCode
         get() = preference.getString(passCode, "")

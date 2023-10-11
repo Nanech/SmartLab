@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
 import java.util.concurrent.TimeUnit
 
@@ -47,6 +48,15 @@ class CreatePassCodeFragment : Fragment() {
         binding.btnDel.setOnClickListener { removeLastCharter() }
 
         binding.passcodeView.setOtpCompletionListener {
+
+            val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
+
+//            sharedPreferenceManager.setPassCode?.toSet("Nya");
+            
+            if (sharedPreferenceManager.setPassCode.isNullOrEmpty() ){
+
+            }
+
             Toast.makeText(requireContext(), binding.passcodeView.text, Toast.LENGTH_LONG ).show()
             // Need to add to Preference Manager
         }
