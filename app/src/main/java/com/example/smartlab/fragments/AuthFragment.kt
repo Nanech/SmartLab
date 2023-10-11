@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
@@ -52,10 +53,11 @@ class AuthFragment : Fragment() {
 
         binding.btn.setOnClickListener(){
             sendEmail()
-            findNavController().navigate(R.id.go_to_email_code)
+
+            val action = AuthFragmentDirections.goToEmailCode(binding.edEmail.text.toString())
+
+            findNavController().navigate(action)
         }
-
-
 
         return view
     }

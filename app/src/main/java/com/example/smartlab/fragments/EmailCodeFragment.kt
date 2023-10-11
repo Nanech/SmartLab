@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.core.content.getSystemService
 import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.smartlab.R
 import com.example.smartlab.adapters.MyAPI
 import com.example.smartlab.databinding.FragmentEmailCodeBinding
@@ -42,6 +43,7 @@ class EmailCodeFragment : Fragment() {
 
     private lateinit var timer: CountDownTimer
 
+   val args: EmailCodeFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +58,8 @@ class EmailCodeFragment : Fragment() {
         _binding = FragmentEmailCodeBinding.inflate(inflater, container, false)
 
         val view = binding.root
+
+        val myEmail = args.email // Taken my email from previous fragment
 
         binding.btnBack.setOnClickListener{
             findNavController().navigate(R.id.back_to_email)
@@ -90,7 +94,7 @@ class EmailCodeFragment : Fragment() {
         return view
     }
 
-    fun SendEmail(){
+    fun sendEmail(){
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 

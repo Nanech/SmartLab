@@ -12,4 +12,7 @@ interface MyAPI {
     @POST("api/SendCode")
     fun postEmail(@Header("User-email") email: String ): Call<String>
 
+    @POST("api/SignIn")
+    fun signIn(@Header("User-email") email: String, @Header("User-code") code: String) :Call<String>
+
 }

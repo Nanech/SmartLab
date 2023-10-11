@@ -24,6 +24,9 @@
         <action
             android:id="@+id/to_create_passcode"
             app:destination="@id/createPassCodeFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
 
     </fragment>
     <fragment
