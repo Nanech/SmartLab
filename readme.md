@@ -7,37 +7,35 @@
 * Bindigs
 * API Models
 * Navigation of Fragments
-
-* Some styles
-    * btns
-    * editText
-    * Splash
-
+* Animations into OnBoarding
 
 * RegEx 
     * Auth Fragmet
 
 * Fragments
-    * Auth
+    * Auth with Buisness Logic
     * EmailCode
-    * OnBoarding
+    * OnBoarding with Buisness Logic
     * ProfileCardCreate
+    * PassCode Creation and Auth with Business Logic
 
-* Preference Manager (Walkthought Screens, ...)
+* Preference Manager 
+    * Walkthought Screens
+    * Pass Code
 
+* API manipulations
+    * Send Code to email
+    * Take JWT
 
 -----
 
 ## Что необходимо реализовать далее
 
 * Another Fragments
-* (make Preference Manager) to PassCode
-* DropDown menu for ProfileCard gender field
-* Buisness logic for email code
-* JWT-token saver
+* JWT-token saver with Preference Manager
+* Send Code on Email connect
 * Make матрёшку consists of Modal Bottom Sheet + Scroll Fragment + Fragment View Model for Create Card
 * RegEx in CardCreation
-* Buisness logic with PassCode
 * Validation of code from email
 * API connection
 
