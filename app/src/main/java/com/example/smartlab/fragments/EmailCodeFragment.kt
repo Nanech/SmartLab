@@ -60,6 +60,7 @@ class EmailCodeFragment : Fragment() {
         val view = binding.root
 
         val myEmail = args.email // Taken my email from previous fragment
+        Toast.makeText(requireContext(), "Sent email - $myEmail", Toast.LENGTH_LONG).show()
 
         binding.btnBack.setOnClickListener{
             findNavController().navigate(R.id.back_to_email)
@@ -75,7 +76,7 @@ class EmailCodeFragment : Fragment() {
 
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(remaining: Long) {
-                var seconds = String.format(Locale.ENGLISH, "%02d", TimeUnit.MILLISECONDS.toSeconds(remaining))
+                var seconds = String.format(Locale.ENGLISH, "%d", TimeUnit.MILLISECONDS.toSeconds(remaining))
                 binding.emailText.text = "Отправить код повторно можно будет через " +
                         seconds + " секунд."
             }
