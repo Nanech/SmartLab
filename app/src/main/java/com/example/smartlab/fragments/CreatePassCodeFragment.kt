@@ -52,7 +52,9 @@ class CreatePassCodeFragment : Fragment() {
             val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
 
 //            sharedPreferenceManager.setPassCode?.toSet("Nya");
-            
+
+            //https://www.youtube.com/watch?v=e8vZAuzFoss
+
             if (sharedPreferenceManager.setPassCode.isNullOrEmpty() ){
 
             }
