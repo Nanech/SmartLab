@@ -1,9 +1,13 @@
 package com.example.smartlab
 
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
+import com.example.smartlab.fragments.CreatePassCodeFragment
 
 class SharedPreferenceManager (context: Context) {
+
 
     private val preference = context.getSharedPreferences(
         context.getString(R.string.app_name), AppCompatActivity.MODE_PRIVATE
@@ -14,14 +18,6 @@ class SharedPreferenceManager (context: Context) {
 
     private val keyIsFirstTime = "isFirstTime"
 
-    private var passCode = ""
-
-    var setPassCode
-        get() = preference.getString(passCode, "")
-        set(value) {
-            editor.putString(passCode, value)
-            editor.commit()
-        }
 
 
     var isFirstTime
@@ -32,4 +28,15 @@ class SharedPreferenceManager (context: Context) {
         }
 
 
+    // Working with Map<String> : String to get and set value
+    var passCode
+        get() = preference.getString("PASSCODE", "")
+        set(value){
+            editor.putString("PASSCODE", value)
+            editor.apply()
+        }
+
+
+
 }
+

@@ -47,7 +47,6 @@ class EmailCodeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -69,7 +68,6 @@ class EmailCodeFragment : Fragment() {
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
             Toast.makeText( requireContext() , "Entered pin: $it", Toast.LENGTH_SHORT).show()
-//            sendEmailAndCode(myEmail)
 
             findNavController().navigate(R.id.to_create_passcode)
 
@@ -88,9 +86,12 @@ class EmailCodeFragment : Fragment() {
 
             override fun onFinish() {
                binding.emailText.isClickable = true
-               binding.emailText.text = "Нажмите, чтобы отправить код"
-               sendEmail(myEmail)
-               binding.emailText.isClickable = false
+               binding.emailText.text = "Нажмите, чтобы повторно отправить код"
+               // May here trouble
+               binding.emailText.setOnClickListener {
+                   sendEmail(myEmail)
+                   binding.emailText.isClickable = false
+               }
                // Здесь код для повторной отправки сообщения после которого emailText.isClickable = false
             }
 
@@ -155,8 +156,8 @@ class EmailCodeFragment : Fragment() {
 
                 if (response.isSuccessful) {
                     val data = response.body()!! // Take JWT token
+                    Toast.makeText(requireContext(), "$data", Toast.LENGTH_LONG).show()
                     // Needs to put in Preference Manager
-
                 }else{
                     Toast.makeText(requireContext(), "Код введён не верно или не " +
                             "верно указана почта", Toast.LENGTH_SHORT).show();

@@ -1,5 +1,6 @@
 package com.example.smartlab.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
+import com.example.smartlab.activities.MainActivity
 import com.example.smartlab.databinding.FragmentCreatePassCodeBinding
 import java.util.concurrent.TimeUnit
 
@@ -49,30 +51,43 @@ class CreatePassCodeFragment : Fragment() {
 
         binding.passcodeView.setOtpCompletionListener {
 
-            val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
+            val sharPrefMan  = SharedPreferenceManager(requireContext())
 
-//            sharedPreferenceManager.setPassCode?.toSet("Nya");
+            if ( !sharPrefMan.passCode.isNullOrEmpty() ){
 
-            //https://www.youtube.com/watch?v=e8vZAuzFoss
+                if ( sharPrefMan.passCode == it ){
+                    findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
+                } else{
+                    Toast.makeText(requireContext(),
+                        "Возникла проблема с вводом пароля.", Toast.LENGTH_SHORT).show()
+                }
 
-            if (sharedPreferenceManager.setPassCode.isNullOrEmpty() ){
-
+            } else{
+                sharPrefMan.passCode = it
+                Toast.makeText(requireContext(), "Пароль успешно создан",
+                    Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
             }
-
-            Toast.makeText(requireContext(), binding.passcodeView.text, Toast.LENGTH_LONG ).show()
             // Need to add to Preference Manager
         }
+
 
         binding.Skip.setOnClickListener {
             findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
         }
-
 
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
 
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        if ( !SharedPreferenceManager(requireContext()).passCode.isNullOrEmpty() ){
+            binding.Skip.isClickable = false
+            binding.Skip.setText(null)
+        }
+    }
 
 
     private fun removeLastCharter(){
@@ -86,12 +101,10 @@ class CreatePassCodeFragment : Fragment() {
 
 
     private fun hadleButtonClick(view: View){
-
         with(view as Button){
             var numb = "$text"
             writeIntoEdtTxt(numb)
         }
-
     }
 
     fun writeIntoEdtTxt(number: String ){

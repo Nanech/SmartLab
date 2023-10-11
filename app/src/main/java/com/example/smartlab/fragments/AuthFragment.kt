@@ -50,14 +50,12 @@ class AuthFragment : Fragment() {
 
         emailFocusListener()
 
-
-
-        binding.btn.setBackgroundResource(R.drawable.btn_nonenabled)
+        
 
         binding.btn.setOnClickListener(){
             sendEmail(binding.edEmail.text.toString())
 
-            val action = AuthFragmentDirections.goToEmailCode(binding.edEmail.text.toString())
+            val action = AuthFragmentDirections.goToEmailCode(binding.edEmail.text.toString().trim())
 
             findNavController().navigate(action)
         }
@@ -77,10 +75,8 @@ class AuthFragment : Fragment() {
                 if ( android.util.Patterns.EMAIL_ADDRESS.matcher(binding.edEmail.text.
                     toString()).matches()  ){
                     binding.btn.isEnabled = true
-                    binding.btn.setBackgroundResource(R.drawable.btn_enabled)
                 } else{
                     binding.btn.isEnabled = false
-                    binding.btn.setBackgroundResource(R.drawable.btn_nonenabled)
                     binding.edEmail.setError("Invalid email")
                 }
             }
