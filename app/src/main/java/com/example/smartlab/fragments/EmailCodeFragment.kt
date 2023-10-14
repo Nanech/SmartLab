@@ -32,7 +32,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-
 class EmailCodeFragment : Fragment() {
 
     private var _binding: FragmentEmailCodeBinding? = null
@@ -57,7 +56,6 @@ class EmailCodeFragment : Fragment() {
 
         val myEmail = args.email // Taken my email from previous fragment
 
-
         binding.btnBack.setOnClickListener{
             findNavController().navigate(R.id.back_to_email)
         }
@@ -65,16 +63,22 @@ class EmailCodeFragment : Fragment() {
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
 
+            val shrdPrefManag = SharedPreferenceManager(requireContext())
 
             sendEmailAndCode(myEmail, it)
 
-            val shrdPrefManag = SharedPreferenceManager(requireContext())
-
+            Toast.makeText(requireContext(), "${shrdPrefManag.jwt}", Toast.LENGTH_SHORT).show()
 
             if (!shrdPrefManag.jwt.isNullOrEmpty()){
                 findNavController().navigate(R.id.to_create_passcode)
             } else{
-                Toast.makeText(requireContext(), "Что-то не так", Toast.LENGTH_SHORT);
+                // Here we need Alert Dialog
+
+                Toast.makeText(requireContext(), "Это ваша почта - $myEmail? " +
+                        "Если нет, то перейдите на предыдущую страницу. " +
+                        "А если это почта ваша, то скорее всего вы не правильно ввели код",
+                    Toast.LENGTH_SHORT).show()
+                binding.otpView.text = null
             }
 
         }
@@ -99,7 +103,6 @@ class EmailCodeFragment : Fragment() {
             }
 
         }
-
 
         //inflater.inflate(R.layout.fragment_email_code, container, false)
 
@@ -136,16 +139,14 @@ class EmailCodeFragment : Fragment() {
         }
     }
 
-    fun sendEmailAndCode(myEmail: String, code: String){
+    fun sendEmailAndCode(myEmail: String, code: String) {
 
         val interceptor = HttpLoggingInterceptor()
 
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor).build()
 
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
+        val gson = GsonBuilder().setLenient().create()
 
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.api_root))
@@ -158,21 +159,24 @@ class EmailCodeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = api.postSignIn(myEmail, code ).awaitResponse()
+                val shrdPrefManag = SharedPreferenceManager(requireContext())
 
-                if (response.isSuccessful){
+                if (response.isSuccessful){// JWT is taken
                     val data = response.body()!!
 
                     Log.d("Gained JWT", data.toString() )
+                    shrdPrefManag.jwt = data
                 }
-
+                else{// JWT is not gained
+                    Log.d("Gained JWT", "Something went wrong" )
+                    shrdPrefManag.jwt = ""
+                }
             } catch (e: Exception){
                 withContext(Dispatchers.Main){
                     Log.d("ThisWentWrong", e.toString())
                 }
             }
         }
-
-
     }
 
 
