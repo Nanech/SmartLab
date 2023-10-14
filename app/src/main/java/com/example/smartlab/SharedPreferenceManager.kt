@@ -37,6 +37,13 @@ class SharedPreferenceManager (context: Context) {
         }
 
 
+    var jwt
+        get() = preference.getString("JWT", "")
+        set(value){
+            editor.putString("JWT", value)
+            editor.apply()
+        }
+
 
 }
 

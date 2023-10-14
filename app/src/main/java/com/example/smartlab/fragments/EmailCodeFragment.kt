@@ -3,38 +3,35 @@ package com.example.smartlab.fragments
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
-import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.content.getSystemService
-import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.adapters.MyAPI
 import com.example.smartlab.databinding.FragmentEmailCodeBinding
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.await
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
-import java.lang.Exception
 import java.util.Locale
 import java.util.concurrent.TimeUnit
+
 
 class EmailCodeFragment : Fragment() {
 
@@ -67,11 +64,18 @@ class EmailCodeFragment : Fragment() {
 
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
-            Toast.makeText( requireContext() , "Entered pin: $it", Toast.LENGTH_SHORT).show()
 
-            findNavController().navigate(R.id.to_create_passcode)
 
-            // Needs to Validate
+            sendEmailAndCode(myEmail, it)
+
+            val shrdPrefManag = SharedPreferenceManager(requireContext())
+
+
+            if (!shrdPrefManag.jwt.isNullOrEmpty()){
+                findNavController().navigate(R.id.to_create_passcode)
+            } else{
+                Toast.makeText(requireContext(), "Что-то не так", Toast.LENGTH_SHORT);
+            }
 
         }
 
@@ -92,7 +96,6 @@ class EmailCodeFragment : Fragment() {
                    sendEmail(myEmail)
                    binding.emailText.isClickable = false
                }
-               // Здесь код для повторной отправки сообщения после которого emailText.isClickable = false
             }
 
         }
@@ -121,57 +124,54 @@ class EmailCodeFragment : Fragment() {
 
         val requestApi = retrofit.create(MyAPI::class.java )
         CoroutineScope(Dispatchers.IO).launch {
+
             try {
-                requestApi.postEmail(email)
+                requestApi.postSignIn(email, binding.otpView.text.toString())
                     .awaitResponse()
                 Log.d("Response", "Success send email")
             } catch (e: Exception) {
                 Log.d(ContentValues.TAG, e.toString())
             }
+
         }
     }
 
-    fun sendEmailAndCode(myEmail: String){
+    fun sendEmailAndCode(myEmail: String, code: String){
 
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val httpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor).build()
 
-        val gsonBuilder = GsonBuilder()
-            .setLenient().create()
+        val gson = GsonBuilder()
+            .setLenient()
+            .create()
 
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
+        val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(getString(R.string.api_root))
-            .client(httpClient).build()
+            .client(httpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
 
-        val requestApi = retrofit.create(MyAPI::class.java )
+        val api = retrofit.create(MyAPI::class.java )
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = requestApi.postSignIn( myEmail, binding.otpView.text.toString() )
-                    .awaitResponse()
+                val response = api.postSignIn(myEmail, code ).awaitResponse()
 
-                if (response.isSuccessful) {
-                    val data = response.body()!! // Take JWT token
-                    Toast.makeText(requireContext(), "$data", Toast.LENGTH_LONG).show()
-                    // Needs to put in Preference Manager
-                }else{
-                    Toast.makeText(requireContext(), "Код введён не верно или не " +
-                            "верно указана почта", Toast.LENGTH_SHORT).show();
+                if (response.isSuccessful){
+                    val data = response.body()!!
 
-                    sendEmail(myEmail)
-
-                    binding.otpView.text = null
+                    Log.d("Gained JWT", data.toString() )
                 }
 
-            } catch (e: Exception) {
-                Log.d(ContentValues.TAG, e.toString())
+            } catch (e: Exception){
+                withContext(Dispatchers.Main){
+                    Log.d("ThisWentWrong", e.toString())
+                }
             }
-
         }
+
 
     }
 
