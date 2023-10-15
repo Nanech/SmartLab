@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.adapters.MyAPI
@@ -44,6 +45,8 @@ class AuthFragment : Fragment() {
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
+
+        findNavController().navigate(R.id.profileCardCreateFragment)
 
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         val view = binding.root

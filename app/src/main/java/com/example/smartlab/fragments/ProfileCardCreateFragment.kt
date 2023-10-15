@@ -1,15 +1,16 @@
 package com.example.smartlab.fragments
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 class ProfileCardCreateFragment : Fragment() {
@@ -32,9 +33,6 @@ class ProfileCardCreateFragment : Fragment() {
         val view = binding.root
 
 
-//        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
-
-
 
 
         val genders = resources.getStringArray(R.array.gender)
@@ -44,7 +42,6 @@ class ProfileCardCreateFragment : Fragment() {
         // Немного некорректно но сойдёт
 
         binding.autoComplete.setOnClickListener{
-
             var textFromHint = binding.inptLayout.hint
 
             if( textFromHint != null || binding.autoComplete.text.isNotEmpty()  ) {
@@ -52,13 +49,34 @@ class ProfileCardCreateFragment : Fragment() {
             } else{
                 binding.inptLayout.hint  =  "Пол"
             }
+        }
 
+        val calender = Calendar.getInstance()
+
+        val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
+
+            calender.set(Calendar.YEAR, year)
+            calender.set(Calendar.MONTH, month)
+            calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateLabel(calender)
+        }
+
+        binding.datePickerActions.setOnClickListener {
+            DatePickerDialog(requireContext(), datePicker, calender.get(Calendar.YEAR),
+                calender.get(Calendar.MONTH), calender.get(Calendar.DAY_OF_MONTH)).show()
         }
 
 
+//        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
 
         return view
+    }
+
+    private fun updateLabel(calender: Calendar) {
+        val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
+        val sdf = dateFormat
+        binding.datePickerActions.setText(sdf.format(calender.time))
     }
 
 

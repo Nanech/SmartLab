@@ -7,7 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.databinding.ActivityMainBinding
@@ -39,12 +41,14 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostController.navController
 
+        // Delete it when need it
+
+
     }
 
     override fun onStart() {
         super.onStart()
         isFirstTime()
-
         // Needs to check JWT
     }
 
