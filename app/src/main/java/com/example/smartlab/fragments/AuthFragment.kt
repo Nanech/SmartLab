@@ -2,6 +2,7 @@ package com.example.smartlab.fragments
 
 import android.content.ContentValues
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,6 +17,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.adapters.MyAPI
 import com.example.smartlab.databinding.FragmentAuthBinding
 import com.google.gson.GsonBuilder
@@ -46,7 +48,12 @@ class AuthFragment : Fragment() {
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
 
-        findNavController().navigate(R.id.profileCardCreateFragment)
+        val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
+
+        if ( !sharedPreferenceManager.jwt.isNullOrEmpty() ){
+            findNavController().navigate(R.id.profileCardCreateFragment)
+        }
+
 
         _binding = FragmentAuthBinding.inflate(inflater, container, false)
         val view = binding.root

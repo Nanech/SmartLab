@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isNotEmpty
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
@@ -31,9 +33,6 @@ class ProfileCardCreateFragment : Fragment() {
         _binding = FragmentProfileCardCreateBinding.inflate(inflater, container, false)
 
         val view = binding.root
-
-
-
 
         val genders = resources.getStringArray(R.array.gender)
         var arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, genders)
@@ -67,11 +66,43 @@ class ProfileCardCreateFragment : Fragment() {
         }
 
 
-//        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
+//        val pattern = """^\d{1,2} (?:|January|February|March|April|May|June|July|August|September|October|November|December) \d{4}$""".toRegex()
 
+        var checkAllField: Boolean = false
+
+        binding.name.doAfterTextChanged {checkAllField = checkForAllFields() }
+        binding.surname.doAfterTextChanged {checkAllField = checkForAllFields() }
+        binding.middleName.doAfterTextChanged {checkAllField = checkForAllFields() }
+        binding.autoComplete.doAfterTextChanged {checkAllField = checkForAllFields() }
+        binding.datePickerActions.doAfterTextChanged {checkAllField = checkForAllFields() }
+
+
+
+        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
+
+        if (checkAllField == true){
+            binding.btn.isEnabled = true
+        } else { binding.btn.isEnabled = false  }
 
         return view
     }
+
+    private fun checkForAllFields():Boolean{
+
+        val patternOFName = "^[A-ZА-Я][A-Za-zА-Яа-я]+$".toRegex()
+
+        if ( patternOFName.matches(binding.name.text.trim()) &&
+            patternOFName.matches(binding.surname.text.trim()) &&
+            patternOFName.matches(binding.middleName.text.trim()) &&
+            binding.autoComplete.text.isNotEmpty() && binding.datePickerActions.text.isNotEmpty()){
+            return  true
+        }
+
+
+        return false;
+    }
+
+
 
     private fun updateLabel(calender: Calendar) {
         val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
