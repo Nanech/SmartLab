@@ -1,15 +1,18 @@
 package com.example.smartlab.fragments
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.view.isNotEmpty
+import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import com.example.smartlab.R
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
+import okhttp3.internal.checkOffsetAndCount
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -68,26 +71,15 @@ class ProfileCardCreateFragment : Fragment() {
 
 //        val pattern = """^\d{1,2} (?:|January|February|March|April|May|June|July|August|September|October|November|December) \d{4}$""".toRegex()
 
-        var checkAllField: Boolean = false
+        forTextChanged()
 
-        binding.name.doAfterTextChanged {checkAllField = checkForAllFields() }
-        binding.surname.doAfterTextChanged {checkAllField = checkForAllFields() }
-        binding.middleName.doAfterTextChanged {checkAllField = checkForAllFields() }
-        binding.autoComplete.doAfterTextChanged {checkAllField = checkForAllFields() }
-        binding.datePickerActions.doAfterTextChanged {checkAllField = checkForAllFields() }
+//        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
-
-
-        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
-
-        if (checkAllField == true){
-            binding.btn.isEnabled = true
-        } else { binding.btn.isEnabled = false  }
 
         return view
     }
 
-    private fun checkForAllFields():Boolean{
+    private fun checkForAllFields(){
 
         val patternOFName = "^[A-ZА-Я][A-Za-zА-Яа-я]+$".toRegex()
 
@@ -95,12 +87,74 @@ class ProfileCardCreateFragment : Fragment() {
             patternOFName.matches(binding.surname.text.trim()) &&
             patternOFName.matches(binding.middleName.text.trim()) &&
             binding.autoComplete.text.isNotEmpty() && binding.datePickerActions.text.isNotEmpty()){
-            return  true
-        }
-
-
-        return false;
+            binding.btn.isEnabled = true
+        } else{ binding.btn.isEnabled = false  }
     }
+
+
+
+    fun forTextChanged(){
+
+        binding.name.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun afterTextChanged(p0: Editable?) {
+                checkForAllFields()  }
+        })
+
+        binding.surname.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun afterTextChanged(p0: Editable?) {
+                checkForAllFields()  }
+        })
+
+        binding.middleName.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun afterTextChanged(p0: Editable?) {
+                checkForAllFields() }
+        } )
+
+        binding.datePickerActions.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun afterTextChanged(p0: Editable?) {
+                checkForAllFields() }
+        } )
+
+        binding.autoComplete.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+            override fun afterTextChanged(p0: Editable?) {
+                checkForAllFields()
+            }
+        } )
+
+
+
+    }
+
 
 
 
