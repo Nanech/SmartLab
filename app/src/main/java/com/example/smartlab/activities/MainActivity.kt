@@ -44,6 +44,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         isFirstTime()
+
+        // Needs to check JWT
     }
 
     private fun isFirstTime(){

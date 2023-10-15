@@ -1,16 +1,22 @@
 package com.example.smartlab.fragments
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -36,10 +42,9 @@ class EmailCodeFragment : Fragment() {
 
     private var _binding: FragmentEmailCodeBinding? = null
     private val  binding get() = _binding!!
-
     private lateinit var timer: CountDownTimer
+    val args: EmailCodeFragmentArgs by navArgs()
 
-   val args: EmailCodeFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,18 +72,10 @@ class EmailCodeFragment : Fragment() {
 
             sendEmailAndCode(myEmail, it)
 
-            Toast.makeText(requireContext(), "${shrdPrefManag.jwt}", Toast.LENGTH_SHORT).show()
-
             if (!shrdPrefManag.jwt.isNullOrEmpty()){
                 findNavController().navigate(R.id.to_create_passcode)
             } else{
-                // Here we need Alert Dialog
-
-                Toast.makeText(requireContext(), "Это ваша почта - $myEmail? " +
-                        "Если нет, то перейдите на предыдущую страницу. " +
-                        "А если это почта ваша, то скорее всего вы не правильно ввели код",
-                    Toast.LENGTH_SHORT).show()
-                binding.otpView.text = null
+                createDialog(myEmail)
             }
 
         }
@@ -94,11 +91,14 @@ class EmailCodeFragment : Fragment() {
 
             override fun onFinish() {
                binding.emailText.isClickable = true
+               binding.emailText.setTextColor(Color.parseColor("#57A9FF"))
                binding.emailText.text = "Нажмите, чтобы повторно отправить код"
                // May here trouble
                binding.emailText.setOnClickListener {
                    sendEmail(myEmail)
+                   binding.emailText.setTextColor(Color.parseColor("#7B7B7D"))
                    binding.emailText.isClickable = false
+                   timer.start()
                }
             }
 
@@ -108,6 +108,43 @@ class EmailCodeFragment : Fragment() {
 
         return view
     }
+
+    private fun createDialog(myEmail: String){
+
+        // Wired realization needs to add binding. But idk how do it
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.custom_dialog)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val title: TextView = dialog.findViewById(R.id.title_dialog)
+        val message: TextView = dialog.findViewById(R.id.message_dialog)
+        val btnYes: Button = dialog.findViewById(R.id.btn_yes)
+        val btnNo: Button = dialog.findViewById(R.id.btn_no)
+
+        title.text = "Ошибка авторизации"
+        message.text = "Возможно ошибка в вашей почте \"$myEmail\".\n" +
+                "\nЕсли это ваша почта, нажмите правую кнопку и " +
+                "повторите ввод кода, иначе нажмите левую кнопку"
+        btnNo.text = "Окей"
+        btnYes.text = "Изменить почту"
+
+       btnYes.setOnClickListener {
+            findNavController().navigate(R.id.back_to_email)
+           dialog.dismiss()
+           dialog.cancel()
+        }
+
+        btnNo.setOnClickListener {
+            binding.otpView.text = null
+            dialog.dismiss()
+            dialog.cancel()
+        }
+
+        dialog.show()
+    }
+
 
     fun sendEmail(email: String){
         val interceptor = HttpLoggingInterceptor()
@@ -198,6 +235,4 @@ class EmailCodeFragment : Fragment() {
         val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
 }
