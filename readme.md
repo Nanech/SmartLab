@@ -8,9 +8,13 @@
 * API Models
 * Navigation of Fragments
 * Animations into OnBoarding
+* Validation of code from email
+* API connection
+
 
 * RegEx 
     * Auth Fragmet
+    * Card Creation
 
 * Fragments
     * Auth with Buisness Logic
@@ -22,6 +26,7 @@
 * Preference Manager 
     * Walkthought Screens
     * Pass Code
+    * JWT Token taker
 
 * API manipulations
     * Send Code to email
@@ -32,10 +37,5 @@
 ## Что необходимо реализовать далее
 
 * Another Fragments
-* JWT-token saver with Preference Manager
-* Send Code on Email connect
 * Make матрёшку consists of Modal Bottom Sheet + Scroll Fragment + Fragment View Model for Create Card
-* RegEx in CardCreation
-* Validation of code from email
-* API connection
-
+* May trouble with emailCode. Please check it!

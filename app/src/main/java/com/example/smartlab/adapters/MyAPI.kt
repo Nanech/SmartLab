@@ -19,13 +19,5 @@ interface MyAPI {
     fun postSignIn(@Header("User-email") email: String, @Header("User-code") code: String) :Call<String>
 
     @POST("api/CreateProfile")
-    suspend fun postCreateProfile(
-        @Field("id") id: Int,
-        @Field("firstName") firstName: String,
-        @Field("lastName") lastName: String,
-        @Field("middleName") middleName: String,
-        @Field("bitrthday") bitrthday: String,
-        @Field("gender") gender: String
-    ) :Response<Profile>
-
+    suspend fun postCreateProfile(@Body profile: Profile) : Profile
 }

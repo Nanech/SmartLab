@@ -17,6 +17,7 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -68,16 +69,7 @@ class EmailCodeFragment : Fragment() {
         binding.otpView.setOtpCompletionListener {
             hideKeyboard()
 
-            val shrdPrefManag = SharedPreferenceManager(requireContext())
-
             sendEmailAndCode(myEmail, it)
-
-            if (!shrdPrefManag.jwt.isNullOrEmpty()){
-                findNavController().navigate(R.id.to_create_passcode)
-            } else{
-                createDialog(myEmail)
-            }
-
         }
 
         var duration = TimeUnit.MINUTES.toMillis(1);
@@ -203,10 +195,17 @@ class EmailCodeFragment : Fragment() {
 
                     Log.d("Gained JWT", data.toString() )
                     shrdPrefManag.jwt = data
+
+                    if (!shrdPrefManag.jwt.isNullOrEmpty()){
+                        findNavController().navigate(R.id.to_create_passcode)
+                    }
+
                 }
                 else{// JWT is not gained
                     Log.d("Gained JWT", "Something went wrong" )
                     shrdPrefManag.jwt = ""
+
+                    createDialog(myEmail)
                 }
             } catch (e: Exception){
                 withContext(Dispatchers.Main){

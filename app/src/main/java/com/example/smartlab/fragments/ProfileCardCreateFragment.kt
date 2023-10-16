@@ -69,6 +69,7 @@ class ProfileCardCreateFragment : Fragment() {
         }
 
 
+        // For mouths
 //        val pattern = """^\d{1,2} (?:|January|February|March|April|May|June|July|August|September|October|November|December) \d{4}$""".toRegex()
 
         forTextChanged()
@@ -79,8 +80,13 @@ class ProfileCardCreateFragment : Fragment() {
         return view
     }
 
-    private fun checkForAllFields(){
+    private fun sendCreateCabinet(){
 
+    }
+
+
+
+    private fun checkForAllFields(){
         val patternOFName = "^[A-ZА-Я][A-Za-zА-Яа-я]+$".toRegex()
 
         if ( patternOFName.matches(binding.name.text.trim()) &&
@@ -91,9 +97,7 @@ class ProfileCardCreateFragment : Fragment() {
         } else{ binding.btn.isEnabled = false  }
     }
 
-
-
-    fun forTextChanged(){
+    private fun forTextChanged(){
 
         binding.name.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -154,8 +158,6 @@ class ProfileCardCreateFragment : Fragment() {
 
 
     }
-
-
 
 
     private fun updateLabel(calender: Calendar) {
