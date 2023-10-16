@@ -3,18 +3,33 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
+import com.example.smartlab.SharedPreferenceManager
+import com.example.smartlab.adapters.MyAPI
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
+import com.example.smartlab.models.Profile
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttp
+import okhttp3.OkHttpClient
 import okhttp3.internal.checkOffsetAndCount
+import retrofit2.Retrofit
+import retrofit2.create
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -74,6 +89,16 @@ class ProfileCardCreateFragment : Fragment() {
 
         forTextChanged()
 
+
+        binding.btn.setOnClickListener {
+            sendCreateCabinet()
+//            findNavController().navigate()
+        }
+
+
+
+
+
 //        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
 
@@ -82,8 +107,47 @@ class ProfileCardCreateFragment : Fragment() {
 
     private fun sendCreateCabinet(){
 
+        var myData =  Profile(0, binding.name.text.toString(),
+            binding.surname.text.toString(), binding.middleName.text.toString(),
+            binding.datePickerActions.text.toString(), binding.autoComplete.text.toString())
+
+        val sharedPreferenceManager = SharedPreferenceManager(requireContext())
+
+        val header = "Bearer " + sharedPreferenceManager.jwt
+
+        Toast.makeText(requireContext(), "$header", Toast.LENGTH_LONG).show()
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(getString(R.string.api_root))
+            .build()
+
+        val api = retrofit.create(MyAPI::class.java)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+
+                val response = api.postCreateProfile(header, myData)
+
+            }
+            catch (e: Exception){
+                withContext(Dispatchers.Main){
+                    Log.d("Send Cabinet Data went wrong:", e.toString())
+                }
+            }
+
+        }
+
     }
 
+
+    private fun getMyDate():Date{
+        val date = binding.datePickerActions.text.toString()
+        val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
+        var dateObj = dateFormat.parse(date)
+        Toast.makeText(requireContext(), "$dateObj", Toast.LENGTH_LONG)
+        return  dateObj
+    }
 
 
     private fun checkForAllFields(){
@@ -160,7 +224,7 @@ class ProfileCardCreateFragment : Fragment() {
     }
 
 
-    private fun updateLabel(calender: Calendar) {
+    private fun updateLabel(calender: Calendar){
         val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
         val sdf = dateFormat
         binding.datePickerActions.setText(sdf.format(calender.time))
