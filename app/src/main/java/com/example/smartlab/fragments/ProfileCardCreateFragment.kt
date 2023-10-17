@@ -117,71 +117,71 @@ class ProfileCardCreateFragment : Fragment() {
 
         val header = "Bearer " + sharedPreferenceManager.jwt
 
-//        val repository = Repository()
-//        val viewModelFactory = ViewModelFactory(repository)
-//        viewModel = ViewModelProvider(this, viewModelFactory).get(ViewModel::class.java)
-//
-//        viewModel.postCreateProfile(header, myData)
-//
-//        viewModel.myResponseProfile.observe(viewLifecycleOwner, Observer { response ->
-//            try {
-//                if (response.isSuccessful){
-//                    Log.d("Response Body", response.body().toString() )
-//                    Log.d("Response Code", response.code().toString() )
-//                    Log.d("Response Message", response.message().toString() )
-//                }else{
-//                    Toast.makeText(requireContext(), "${response.code()}", Toast.LENGTH_LONG).show()
-//                    Log.d("Response error", response.code().toString())
-//                }
-//            }catch (e: Exception){
-//                Log.d("Error msg", e.message.toString())
-//            }
-//        })
+        val repository = Repository()
+        val viewModelFactory = ViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(ViewModel::class.java)
 
+        viewModel.postCreateProfile(header, myData)
 
-        val interceptor = HttpLoggingInterceptor()
-            interceptor.level = HttpLoggingInterceptor.Level.BODY
-
-        val httpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor).build()
-
-        val gson = GsonBuilder().setLenient().create()
-
-        val retrofit: Retrofit = Retrofit.Builder()
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .baseUrl(getString(R.string.api_root))
-            .client(httpClient)
-            .build()
-
-
-
-        val api = retrofit.create(MyAPI::class.java)
-
-
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModel.myResponseProfile.observe(viewLifecycleOwner, Observer { response ->
             try {
-                val response = api.postCreateProfile(header, myData)
-
                 if (response.isSuccessful){
-                    Log.d("Respond code", response.code().toString())
-                    Log.d("Post respond", response.body().toString())
-                    Log.d("Respond message", response.message().toString())
+                    Log.d("Response Body", response.body().toString() )
+                    Log.d("Response Code", response.code().toString() )
+                    Log.d("Response Message", response.message().toString() )
                 }else{
-                    Log.d("Respond error code", response.code().toString())
-                    Log.d("Respond body", response.body().toString())
-                    Log.d("Respond error body", response.errorBody().toString())
+                    Toast.makeText(requireContext(), "${response.code()}", Toast.LENGTH_LONG).show()
+                    Log.d("Response error", response.code().toString())
                 }
-
+            }catch (e: Exception){
+                Log.d("Error msg", e.message.toString())
             }
-            catch (e: Exception){
-                withContext(Dispatchers.Main){
+        })
 
-                    Log.d("Something went wrong", e.toString())
-                }
-            }
-
-        }
+        // На всякий случай старый вариант использования
+//        val interceptor = HttpLoggingInterceptor()
+//            interceptor.level = HttpLoggingInterceptor.Level.BODY
+//
+//        val httpClient = OkHttpClient.Builder()
+//            .addInterceptor(interceptor).build()
+//
+//        val gson = GsonBuilder().setLenient().create()
+//
+//        val retrofit: Retrofit = Retrofit.Builder()
+//            .addConverterFactory(ScalarsConverterFactory.create())
+//            .addConverterFactory(GsonConverterFactory.create(gson))
+//            .baseUrl(getString(R.string.api_root))
+//            .client(httpClient)
+//            .build()
+//
+//
+//
+//        val api = retrofit.create(MyAPI::class.java)
+//
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val response = api.postCreateProfile(header, myData)
+//
+//                if (response.isSuccessful){
+//                    Log.d("Respond code", response.code().toString())
+//                    Log.d("Post respond", response.body().toString())
+//                    Log.d("Respond message", response.message().toString())
+//                }else{
+//                    Log.d("Respond error code", response.code().toString())
+//                    Log.d("Respond body", response.body().toString())
+//                    Log.d("Respond error body", response.errorBody().toString())
+//                }
+//
+//            }
+//            catch (e: Exception){
+//                withContext(Dispatchers.Main){
+//
+//                    Log.d("Something went wrong", e.toString())
+//                }
+//            }
+//
+//        }
 
     }
 
