@@ -9,27 +9,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
-import com.example.smartlab.adapters.MyAPI
+import com.example.smartlab.ViewModel
+import com.example.smartlab.ViewModelFactory
+import com.example.smartlab.api.MyAPI
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
 import com.example.smartlab.models.Profile
+import com.example.smartlab.repository.Repository
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttp
 import okhttp3.OkHttpClient
-import okhttp3.internal.checkOffsetAndCount
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.create
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 
@@ -39,6 +41,7 @@ class ProfileCardCreateFragment : Fragment() {
     private var _binding: FragmentProfileCardCreateBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +74,6 @@ class ProfileCardCreateFragment : Fragment() {
         val calender = Calendar.getInstance()
 
         val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
-
             calender.set(Calendar.YEAR, year)
             calender.set(Calendar.MONTH, month)
             calender.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -96,9 +98,6 @@ class ProfileCardCreateFragment : Fragment() {
         }
 
 
-
-
-
 //        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
 
@@ -107,32 +106,78 @@ class ProfileCardCreateFragment : Fragment() {
 
     private fun sendCreateCabinet(){
 
-        var myData =  Profile(0, binding.name.text.toString(),
+        val myDate = getMyDate()
+
+
+        val myData =  Profile(0, binding.name.text.toString(),
             binding.surname.text.toString(), binding.middleName.text.toString(),
-            binding.datePickerActions.text.toString(), binding.autoComplete.text.toString())
+            myDate, binding.autoComplete.text.toString())
 
         val sharedPreferenceManager = SharedPreferenceManager(requireContext())
 
         val header = "Bearer " + sharedPreferenceManager.jwt
 
-        Toast.makeText(requireContext(), "$header", Toast.LENGTH_LONG).show()
+//        val repository = Repository()
+//        val viewModelFactory = ViewModelFactory(repository)
+//        viewModel = ViewModelProvider(this, viewModelFactory).get(ViewModel::class.java)
+//
+//        viewModel.postCreateProfile(header, myData)
+//
+//        viewModel.myResponseProfile.observe(viewLifecycleOwner, Observer { response ->
+//            try {
+//                if (response.isSuccessful){
+//                    Log.d("Response Body", response.body().toString() )
+//                    Log.d("Response Code", response.code().toString() )
+//                    Log.d("Response Message", response.message().toString() )
+//                }else{
+//                    Toast.makeText(requireContext(), "${response.code()}", Toast.LENGTH_LONG).show()
+//                    Log.d("Response error", response.code().toString())
+//                }
+//            }catch (e: Exception){
+//                Log.d("Error msg", e.message.toString())
+//            }
+//        })
 
 
-        val retrofit = Retrofit.Builder()
+        val interceptor = HttpLoggingInterceptor()
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
+
+        val httpClient = OkHttpClient.Builder()
+            .addInterceptor(interceptor).build()
+
+        val gson = GsonBuilder().setLenient().create()
+
+        val retrofit: Retrofit = Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .baseUrl(getString(R.string.api_root))
+            .client(httpClient)
             .build()
+
+
 
         val api = retrofit.create(MyAPI::class.java)
 
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-
                 val response = api.postCreateProfile(header, myData)
+
+                if (response.isSuccessful){
+                    Log.d("Respond code", response.code().toString())
+                    Log.d("Post respond", response.body().toString())
+                    Log.d("Respond message", response.message().toString())
+                }else{
+                    Log.d("Respond error code", response.code().toString())
+                    Log.d("Respond body", response.body().toString())
+                    Log.d("Respond error body", response.errorBody().toString())
+                }
 
             }
             catch (e: Exception){
                 withContext(Dispatchers.Main){
-                    Log.d("Send Cabinet Data went wrong:", e.toString())
+
+                    Log.d("Something went wrong", e.toString())
                 }
             }
 
@@ -141,12 +186,13 @@ class ProfileCardCreateFragment : Fragment() {
     }
 
 
-    private fun getMyDate():Date{
+    private fun getMyDate():String{
         val date = binding.datePickerActions.text.toString()
         val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
         var dateObj = dateFormat.parse(date)
-        Toast.makeText(requireContext(), "$dateObj", Toast.LENGTH_LONG)
-        return  dateObj
+        val newDateFormant = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val myString = newDateFormant.format(dateObj.time)
+        return  myString
     }
 
 

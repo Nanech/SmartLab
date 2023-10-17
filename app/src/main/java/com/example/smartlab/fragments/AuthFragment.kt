@@ -2,8 +2,6 @@ package com.example.smartlab.fragments
 
 import android.content.ContentValues
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -12,13 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
-import com.example.smartlab.adapters.MyAPI
+import com.example.smartlab.api.MyAPI
 import com.example.smartlab.databinding.FragmentAuthBinding
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope

@@ -1,7 +1,6 @@
 package com.example.smartlab.fragments
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues
 import android.content.Context
@@ -17,13 +16,12 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
-import com.example.smartlab.adapters.MyAPI
+import com.example.smartlab.api.MyAPI
 import com.example.smartlab.databinding.FragmentEmailCodeBinding
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope

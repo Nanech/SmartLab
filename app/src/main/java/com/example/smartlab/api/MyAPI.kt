@@ -1,4 +1,4 @@
-package com.example.smartlab.adapters
+package com.example.smartlab.api
 
 
 import com.example.smartlab.models.Profile
