@@ -11,17 +11,16 @@
 * Validation of code from email
 * API connection
 
-
 * RegEx 
     * Auth Fragmet
     * Card Creation
 
 * Fragments
-    * Auth with Buisness Logic
-    * EmailCode
-    * OnBoarding with Buisness Logic
-    * ProfileCardCreate
-    * PassCode Creation and Auth with Business Logic
+    * Auth with BL
+    * EmailCode with BL
+    * OnBoarding with BL
+    * ProfileCardCreate with BL
+    * PassCode Creation with BL
 
 * Preference Manager 
     * Walkthought Screens
@@ -31,11 +30,12 @@
 * API manipulations
     * Send Code to email
     * Take JWT
+    * Create (post) Profile Card
 
 -----
 
 ## Что необходимо реализовать далее
 
 * Another Fragments
-* Make матрёшку consists of Modal Bottom Sheet + Scroll Fragment + Fragment View Model for Create Card
-* May trouble with emailCode. Please check it!
+* Make Buttom Navigate Activity after it make few Fragments with some logic (Scroll Frag, Modal Buttom Sheet)
+* Make some logic with Fragmetns
