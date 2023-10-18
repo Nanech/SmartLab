@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
 
 //        Starts the navigation
 
-        val navHostController = supportFragmentManager
-            .findFragmentById(R.id.fragment) as NavHostFragment
-        navController = navHostController.navController
+//        val navHostController = supportFragmentManager
+//            .findFragmentById(R.id.fragment) as NavHostFragment
+//        navController = navHostController.navController
 
         // Delete it when need it
 
