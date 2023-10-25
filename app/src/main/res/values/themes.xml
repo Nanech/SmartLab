@@ -5,7 +5,12 @@
         <item name="editTextStyle">@style/myEditText</item>
         <item name="otpViewStyle">@style/MyOtp</item>
 
+
     </style>
+
+<!--    <item name="android:textColor">@color/action_color</item>-->
+<!--    <item name="colorPrimary">@color/action_color</item>-->
+<!--    <item name="colorPrimaryVariant">@color/action_color</item>-->
 
 
     <!--  Card Create   -->
@@ -106,5 +111,34 @@
     </style>
 
 
+    <!--BottomNavigation Bar-->
+    <!--BottomNavigation Bar-->
+    <!--BottomNavigation Bar-->
+
+
+
+    <style name="ButtomNavigation" parent="">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+    </style>
+
+    <style name="App.Custom.Indicator" parent="Widget.MaterialComponents.BottomAppBar.Colored">
+
+<!--        https://m2.material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar-->
+        <item name="materialThemeOverlay">@style/ButtomNavigation</item>
+<!--        <item name="colorPrimary">@color/action_color</item>-->
+<!--        <item name="colorOnPrimary">@color/action_color</item>-->
+    </style>
+
+
+    <style name="ThemeForApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="bottomNavigationStyle">@style/App.Custom.Indicator</item>
+
+    </style>
+
+    <!--какая то жесть-->
 
 </resources>

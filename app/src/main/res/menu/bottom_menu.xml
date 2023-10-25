@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/analyzes"
+        android:title="Анализы"
+        android:icon="@drawable/icon_analyzes_selector"
+        />
+
+    <item
+        android:id="@+id/results"
+        android:title="Результаты"
+        android:icon="@drawable/icon_results_def_color"
+        />
+
+    <item
+        android:id="@+id/support"
+        android:title="Анализы"
+        android:icon="@drawable/icon_support_def_color"
+        />
+
+    <item
+        android:id="@+id/profile"
+        android:title="Результаты"
+        android:icon="@drawable/icon_users_def_color"
+        />
+
+
+</menu>

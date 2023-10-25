@@ -17,6 +17,9 @@
         android:theme="@style/Theme.SmartLab"
         tools:targetApi="31">
         <activity
+            android:name=".activities.MediatorActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.OnBoardingActivity"
             android:exported="false" />
         <activity

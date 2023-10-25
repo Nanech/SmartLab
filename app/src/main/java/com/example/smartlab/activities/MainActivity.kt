@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.databinding.ActivityMainBinding
+import com.example.smartlab.databinding.ActivityMediatorBinding
+import java.util.zip.Inflater
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
 
         setContentView(view)
+
+        startActivity(Intent(this, MediatorActivity::class.java))
+        finish()
 
 //        Starts the navigation
 
