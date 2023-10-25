@@ -44,7 +44,7 @@ class AuthFragment : Fragment() {
     savedInstanceState: Bundle?): View? {
 
         val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
-        sharedPreferenceManager.jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inhpc2FieUBnbWFpbC5jb20iLCJEYXRlIjoiMTcuMTAuMjAyMyAxMzo0ODo1MyIsImp0aSI6ImM5N2NiNDgwLTc5NmUtNGIzYy1iNWE2LTNiOGY1OTU1MDUxMSIsImV4cCI6MTcwMDEzMTczMywiaXNzIjoiTXlBdXRoU2VydmVyIiwiYXVkIjoiTXlBdXRoQ2xpZW50In0.9ViwKB7QudkYNxfYEbDEQWtdJ4YS3zeBMup51oFvRZ8"
+//        sharedPreferenceManager.jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inhpc2FieUBnbWFpbC5jb20iLCJEYXRlIjoiMTcuMTAuMjAyMyAxMzo0ODo1MyIsImp0aSI6ImM5N2NiNDgwLTc5NmUtNGIzYy1iNWE2LTNiOGY1OTU1MDUxMSIsImV4cCI6MTcwMDEzMTczMywiaXNzIjoiTXlBdXRoU2VydmVyIiwiYXVkIjoiTXlBdXRoQ2xpZW50In0.9ViwKB7QudkYNxfYEbDEQWtdJ4YS3zeBMup51oFvRZ8"
         if ( !sharedPreferenceManager.jwt.isNullOrEmpty() ){
             findNavController().navigate(R.id.profileCardCreateFragment)
         }

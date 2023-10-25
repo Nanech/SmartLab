@@ -117,28 +117,15 @@
 
 
 
-    <style name="ButtomNavigation" parent="">
+    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
-
-    </style>
-
-    <style name="App.Custom.Indicator" parent="Widget.MaterialComponents.BottomAppBar.Colored">
-
-<!--        https://m2.material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar-->
-        <item name="materialThemeOverlay">@style/ButtomNavigation</item>
-<!--        <item name="colorPrimary">@color/action_color</item>-->
-<!--        <item name="colorOnPrimary">@color/action_color</item>-->
-    </style>
-
-
-    <style name="ThemeForApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-
-        <item name="bottomNavigationStyle">@style/App.Custom.Indicator</item>
+        <item name="colorPrimary">@color/action_color</item>
+        <item name="colorAccent">@color/white</item>
 
     </style>
 
-    <!--какая то жесть-->
+
+
+
 
 </resources>

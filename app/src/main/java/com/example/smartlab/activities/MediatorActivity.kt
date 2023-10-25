@@ -25,28 +25,9 @@ class MediatorActivity : AppCompatActivity() {
 
         bottomNavigationView = binding.bottomNavigation
 
-        bottomNavigationView.setOnItemSelectedListener { menuItem ->
-            when(menuItem.itemId){
-                R.id.analyzes -> {
-                    replaceFragment(AnalyzesFragment())
-                    true }
-                R.id.results ->{
-                    replaceFragment(ResultsFragment())
-                    true
-                }
-                R.id.support ->{
-                    replaceFragment(SupportFragment())
-                    true
-                }
-                R.id.profile ->{
-                    replaceFragment(ProfileFragment())
-                    true
-                }
-                else  -> false
-            }
-        }
 
-        replaceFragment(AnalyzesFragment())
+
+//        replaceFragment(AnalyzesFragment())
 
 
 //        setContentView(R.layout.activity_mediator)
@@ -56,9 +37,6 @@ class MediatorActivity : AppCompatActivity() {
     }
 
 
-    private  fun replaceFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()
-    }
 
 
 

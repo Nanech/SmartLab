@@ -16,6 +16,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_analyzes">Анализы</string>
+    <string name="title_resources">Результаты</string>
+    <string name="title_support">Поддержка</string>
+    <string name="title_profile">Профиль</string>
 
     <string-array name="gender">
         <item>Мужской</item>
