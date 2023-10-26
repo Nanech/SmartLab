@@ -1,5 +1,6 @@
 package com.example.smartlab.fragments
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,20 +17,10 @@ import com.example.smartlab.R
 import com.example.smartlab.SharedPreferenceManager
 import com.example.smartlab.ViewModel
 import com.example.smartlab.ViewModelFactory
-import com.example.smartlab.api.MyAPI
+import com.example.smartlab.activities.MediatorActivity
 import com.example.smartlab.databinding.FragmentProfileCardCreateBinding
 import com.example.smartlab.models.Profile
 import com.example.smartlab.repository.Repository
-import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -98,6 +89,11 @@ class ProfileCardCreateFragment : Fragment() {
         }
 
 
+        binding.SkipProfileCard.setOnClickListener {
+            val intent = Intent(activity, MediatorActivity::class.java)
+            startActivity(intent)
+        }
+
 //        inflater.inflate(R.layout.fragment_profile_card_create, container, false)
 
 
@@ -137,6 +133,10 @@ class ProfileCardCreateFragment : Fragment() {
                 Log.d("Error msg", e.message.toString())
             }
         })
+
+
+
+
 
         // На всякий случай старый вариант использования
 //        val interceptor = HttpLoggingInterceptor()

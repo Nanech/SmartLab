@@ -25,28 +25,12 @@ class MediatorActivity : AppCompatActivity() {
         binding = ActivityMediatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navController = this.findNavController(R.id.fragment_container_mediator)
-//
-//        val navView: BottomNavigationView = binding.bottomNavigation
-//
-//        navView.setupWithNavController(navController)
-
-
-
 
         val navHostController = supportFragmentManager
             .findFragmentById(R.id.fragment_container_mediator) as NavHostFragment
         val navController = navHostController.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
-
-
-        //нахождение нижней навигационной панели
-
-
-
-
-//        replaceFragment(AnalyzesFragment())
 
 
 //        setContentView(R.layout.activity_mediator)

@@ -37,19 +37,24 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(view)
 
-        startActivity(Intent(this, MediatorActivity::class.java))
-        finish()
+
 
 //        Starts the navigation
 
-//        val navHostController = supportFragmentManager
-//            .findFragmentById(R.id.fragment) as NavHostFragment
-//        navController = navHostController.navController
+        val navHostController = supportFragmentManager
+            .findFragmentById(R.id.fragment) as NavHostFragment
+        navController = navHostController.navController
 
         // Delete it when need it
 
 
     }
+
+    public fun goMediator(){
+        startActivity(Intent(this, MediatorActivity::class.java))
+        finish()
+    }
+
 
     override fun onStart() {
         super.onStart()
