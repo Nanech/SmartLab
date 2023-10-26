@@ -23,4 +23,7 @@ class ResultsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_results, container, false)
     }
 
+
+
+
 }

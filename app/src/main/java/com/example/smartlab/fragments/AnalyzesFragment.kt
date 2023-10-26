@@ -23,4 +23,8 @@ class AnalyzesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_analyzes, container, false)
     }
 
+
+
+
+
 }
