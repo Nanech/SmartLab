@@ -5,10 +5,24 @@
 
 ## Что реализовано в данном проекте
 
+Приложение встречает пользователя "Splash Screen" и "OnBoarding/Walkthrough Screen".
+
+* *Splash Screen* - всплывающий экран заставки, реализован через специальное [API](https://developer.android.com/develop/ui/views/launch/splash-screen), которое ввели начиная с Android 12.
+* OnBoarding/Walkthrough Screen - экран первоначальной загрузки, который запускается только в том случае, если вход в приложение является первым.
+
+```build.gradle.kts
+implementation("androidx.core:core-splashscreen:1.0.1") // Splash
+```
+
+<p align="center">
+  <img alt="Splash & OnBoarding" src="/app/gitresources/splash_and_onboarding.gif">
+</p>
+
+
  В контексте данного решения был использован навигационный компонент с использованием множества фрагментов.
 
 <p align="center">
-  <img src="/app/gitresources/navigation.png">
+  <img alt="Навигация" src="/app/gitresources/navigation.png">
 </p>
 
 * Splash Screen
