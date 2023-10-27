@@ -14,15 +14,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class OnBoardingActivity : AppCompatActivity() {
 
-
+    // Array of OnBoarding Info
     private lateinit var pagerList:ArrayList<OnBoardingPage>
-
-
-
     lateinit var binding: ActivityOnBoardingBinding
+    lateinit var onBoardingViewPage2: ViewPager2
 
 
     private val onBoardingPageChangerCallback  = object :  ViewPager2.OnPageChangeCallback() {
+        // Sets text of OnBoarding current page depending of the index
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
             when (position) {
@@ -34,20 +33,19 @@ class OnBoardingActivity : AppCompatActivity() {
         }
     }
 
-
-    lateinit var onBoardingViewPage2: ViewPager2
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         val view = binding.root
 
+        // Data of OnBoarding Pages
         pagerList = arrayListOf(
         OnBoardingPage(getString(R.string.header1), getString(R.string.desc1), R.raw.analyzes ),
         OnBoardingPage(getString(R.string.header2), getString(R.string.desc2), R.raw.notifications ),
-        OnBoardingPage(getString(R.string.header3), getString(R.string.desc3), R.raw.monitoring)
-        )
+        OnBoardingPage(getString(R.string.header3), getString(R.string.desc3),
+            R.raw.monitoring))
+
         onBoardingViewPage2 = binding.switcher
 
         onBoardingViewPage2.apply {
@@ -56,6 +54,7 @@ class OnBoardingActivity : AppCompatActivity() {
             (getChildAt(0) as RecyclerView ).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         }
 
+        // The tabs bottom of animation
         val tablLayout = binding.tabLayout
         TabLayoutMediator(tablLayout, onBoardingViewPage2){tab, position -> }.attach()
 
@@ -81,6 +80,5 @@ class OnBoardingActivity : AppCompatActivity() {
         sharedPreferenceManager.isFirstTime = false
         val homeIntent = Intent(this, MainActivity::class.java)
         startActivity(homeIntent)
-
     }
 }

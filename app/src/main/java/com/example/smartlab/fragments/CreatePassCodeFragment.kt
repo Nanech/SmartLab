@@ -31,22 +31,24 @@ class CreatePassCodeFragment : Fragment() {
 
     }
 
-    override fun onCreateView(  inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle? ): View? {
+    override fun onCreateView(  inflater: LayoutInflater, container: ViewGroup?,
+                                savedInstanceState: Bundle? ): View? {
 
         _binding = FragmentCreatePassCodeBinding.inflate(inflater, container, false)
 
         val view = binding.root
 
+        // Bad example of multi listener, cause we are in fragment (Don`t have attribute "OnClick").
         binding.btn0.setOnClickListener(::hadleButtonClick)
-        binding.btn1.setOnClickListener(::hadleButtonClick )
-        binding.btn2.setOnClickListener(::hadleButtonClick )
-        binding.btn3.setOnClickListener(::hadleButtonClick )
-        binding.btn4.setOnClickListener(::hadleButtonClick )
-        binding.btn5.setOnClickListener(::hadleButtonClick )
-        binding.btn6.setOnClickListener(::hadleButtonClick )
-        binding.btn7.setOnClickListener(::hadleButtonClick )
-        binding.btn8.setOnClickListener(::hadleButtonClick )
-        binding.btn9.setOnClickListener(::hadleButtonClick )
+        binding.btn1.setOnClickListener(::hadleButtonClick)
+        binding.btn2.setOnClickListener(::hadleButtonClick)
+        binding.btn3.setOnClickListener(::hadleButtonClick)
+        binding.btn4.setOnClickListener(::hadleButtonClick)
+        binding.btn5.setOnClickListener(::hadleButtonClick)
+        binding.btn6.setOnClickListener(::hadleButtonClick)
+        binding.btn7.setOnClickListener(::hadleButtonClick)
+        binding.btn8.setOnClickListener(::hadleButtonClick)
+        binding.btn9.setOnClickListener(::hadleButtonClick)
         binding.btnDel.setOnClickListener { removeLastCharter() }
 
         binding.passcodeView.setOtpCompletionListener {
@@ -56,8 +58,10 @@ class CreatePassCodeFragment : Fragment() {
             if ( !sharPrefMan.passCode.isNullOrEmpty() ){
 
                 if ( sharPrefMan.passCode == it ){
-                    findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
-                } else{
+                    findNavController()
+                        .navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
+                }
+                else{
                     Toast.makeText(requireContext(),
                         "Возникла проблема с вводом пароля.", Toast.LENGTH_SHORT).show()
                 }
@@ -66,14 +70,14 @@ class CreatePassCodeFragment : Fragment() {
                 sharPrefMan.passCode = it
                 Toast.makeText(requireContext(), "Пароль успешно создан",
                     Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
+                findNavController()
+                    .navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
             }
-            // Need to add to Preference Manager
         }
 
-
         binding.Skip.setOnClickListener {
-            findNavController().navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
+            findNavController()
+                .navigate(R.id.action_createPassCodeFragment_to_profileCardCreateFragment)
         }
 
 //      inflater.inflate(R.layout.fragment_create_pass_code, container, false)
@@ -89,7 +93,6 @@ class CreatePassCodeFragment : Fragment() {
         }
     }
 
-
     private fun removeLastCharter(){
         val text = binding.passcodeView.text.toString()
         if (text.isNotEmpty()){
@@ -98,7 +101,6 @@ class CreatePassCodeFragment : Fragment() {
             binding.passcodeView.setSelection(newText.length)
         }
     }
-
 
     private fun hadleButtonClick(view: View){
         with(view as Button){
@@ -110,8 +112,4 @@ class CreatePassCodeFragment : Fragment() {
     fun writeIntoEdtTxt(number: String ){
         binding.passcodeView.text?.append(number)
     }
-
-
-
-
 }

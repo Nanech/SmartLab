@@ -15,7 +15,6 @@ class OnBoardingFragment (val page: OnBoardingPage) : Fragment() {
     private var _binding: FragmentOnBoardingBinding? = null
     private val binding get() = _binding!!
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -23,21 +22,16 @@ class OnBoardingFragment (val page: OnBoardingPage) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+        savedInstanceState: Bundle?): View? {
 
         _binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
-
         val view = binding.root
-
-//       val view =  inflater.inflate(R.layout.fragment_on_boarding, container, false)
-
 
         binding.headerTitle.text = page.header
         binding.decsTitle.text = page.description
-//        binding.ltAnimations.setAnimation(R.raw.analyzes)
         binding.ltAnimations.setAnimation(page.animation)
+
+//       val view =  inflater.inflate(R.layout.fragment_on_boarding, container, false)
 
         return view
     }

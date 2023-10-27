@@ -25,6 +25,7 @@ class MediatorActivity : AppCompatActivity() {
         binding = ActivityMediatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Navigation for Bottom Bar and fragments. Check nav -> mediator_nav.xml
 
         val navHostController = supportFragmentManager
             .findFragmentById(R.id.fragment_container_mediator) as NavHostFragment
@@ -32,14 +33,7 @@ class MediatorActivity : AppCompatActivity() {
 
         binding.bottomNavigation.setupWithNavController(navController)
 
-
-//        setContentView(R.layout.activity_mediator)
-
-
+        // setContentView(R.layout.activity_mediator)
     }
-
-
-
-
 
 }

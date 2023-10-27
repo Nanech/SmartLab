@@ -27,9 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        installSplashScreen()
-
-//        splashScreen.setKeepOnScreenCondition{false}
+        installSplashScreen() // Start the Splash Screen
 
         // Sets binding as "activitymain.xml" and runs it
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,32 +35,21 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(view)
 
-
-
-//        Starts the navigation
+        //  Starts the navigation
 
         val navHostController = supportFragmentManager
             .findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostController.navController
 
-        // Delete it when need it
-
-
     }
-
-    public fun goMediator(){
-        startActivity(Intent(this, MediatorActivity::class.java))
-        finish()
-    }
-
 
     override fun onStart() {
         super.onStart()
-        isFirstTime()
-        // Needs to check JWT
+        isFirstTime() // For OnBoarding Page
     }
 
     private fun isFirstTime(){
+        // Checks whether the OnBoarding was started or not
         val sharedPreferenceManager  = SharedPreferenceManager(this)
         if (sharedPreferenceManager.isFirstTime){
             startActivity(Intent(this, OnBoardingActivity::class.java))

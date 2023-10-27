@@ -33,29 +33,23 @@ class AuthFragment : Fragment() {
     private var _binding: FragmentAuthBinding? = null
     private val binding get()  = _binding!!
 
-    private lateinit var navController:  NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?): View? {
 
+        _binding = FragmentAuthBinding.inflate(inflater, container, false)
+        val view = binding.root
+
         val sharedPreferenceManager  = SharedPreferenceManager(requireContext())
-        sharedPreferenceManager.jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inhpc2FieUBnbWFpbC5jb20iLCJEYXRlIjoiMTcuMTAuMjAyMyAxMzo0ODo1MyIsImp0aSI6ImM5N2NiNDgwLTc5NmUtNGIzYy1iNWE2LTNiOGY1OTU1MDUxMSIsImV4cCI6MTcwMDEzMTczMywiaXNzIjoiTXlBdXRoU2VydmVyIiwiYXVkIjoiTXlBdXRoQ2xpZW50In0.9ViwKB7QudkYNxfYEbDEQWtdJ4YS3zeBMup51oFvRZ8"
+
         if ( !sharedPreferenceManager.jwt.isNullOrEmpty() ){
             findNavController().navigate(R.id.profileCardCreateFragment)
         }
 
-
-        _binding = FragmentAuthBinding.inflate(inflater, container, false)
-        val view = binding.root
-
-        emailFocusListener()
-
-        
+        emailFocusListener() // Listener for email validation
 
         binding.btn.setOnClickListener(){
             sendEmail(binding.edEmail.text.toString())
@@ -70,22 +64,19 @@ class AuthFragment : Fragment() {
 
     private fun emailFocusListener(){
         binding.edEmail.addTextChangedListener( object:TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
 
             override fun afterTextChanged(p0: Editable?) {
                 if ( android.util.Patterns.EMAIL_ADDRESS.matcher(binding.edEmail.text.
-                    toString()).matches()  ){
-                    binding.btn.isEnabled = true
-                } else{
+                    toString()).matches()) // Email RegEx
+                { binding.btn.isEnabled = true }
+                else{
                     binding.btn.isEnabled = false
                     binding.edEmail.setError("Invalid email")
                 }
             }
-
         } )
     }
 

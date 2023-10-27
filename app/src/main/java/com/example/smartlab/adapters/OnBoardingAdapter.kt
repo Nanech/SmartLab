@@ -15,6 +15,4 @@ class OnBoardingAdapter (activity: FragmentActivity, private val pagerList: Arra
     override fun createFragment(position: Int): Fragment {
         return OnBoardingFragment(pagerList[position])
     }
-
-
 }

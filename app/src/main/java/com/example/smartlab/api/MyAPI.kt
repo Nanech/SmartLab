@@ -1,6 +1,5 @@
 package com.example.smartlab.api
 
-
 import com.example.smartlab.models.Profile
 import retrofit2.Call
 import retrofit2.Response
@@ -10,8 +9,6 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface MyAPI {
-
-    
     @POST("api/SendCode")
     fun postEmail(@Header("User-email") email: String ): Call<String>
 

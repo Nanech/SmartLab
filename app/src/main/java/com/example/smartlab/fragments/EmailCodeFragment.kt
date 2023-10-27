@@ -55,26 +55,28 @@ class EmailCodeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentEmailCodeBinding.inflate(inflater, container, false)
-
         val view = binding.root
 
-        val myEmail = args.email // Taken my email from previous fragment
+        val myEmail = args.email // Take my email from previous fragment
 
         binding.btnBack.setOnClickListener{
             findNavController().navigate(R.id.back_to_email)
         }
 
-        binding.otpView.setOtpCompletionListener {
+        binding.otpView.setOtpCompletionListener {// When code is complete
             hideKeyboard()
-
             sendEmailAndCode(myEmail, it)
         }
+
+        // Timer BL (Business Logic)
 
         var duration = TimeUnit.MINUTES.toMillis(1);
 
         timer = object : CountDownTimer(duration, 1000) {
             override fun onTick(remaining: Long) {
-                var seconds = String.format(Locale.ENGLISH, "%d", TimeUnit.MILLISECONDS.toSeconds(remaining))
+                var seconds = String.format(Locale.ENGLISH,
+                    "%d", TimeUnit.MILLISECONDS.toSeconds(remaining))
+
                 binding.emailText.text = "Отправить код повторно можно будет через " +
                         seconds + " секунд."
             }
@@ -102,6 +104,7 @@ class EmailCodeFragment : Fragment() {
     private fun createDialog(myEmail: String){
 
         // Wired realization needs to add binding. But idk how do it
+        // But without it dialog don`t works
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -212,7 +215,6 @@ class EmailCodeFragment : Fragment() {
             }
         }
     }
-
 
     override fun onStart() {
         super.onStart()
