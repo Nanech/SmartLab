@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/authFragment2">
+    app:startDestination="@id/authFragment">
     <fragment
-        android:id="@+id/authFragment2"
+        android:id="@+id/authFragment"
         android:name="com.example.smartlab.fragments.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" >
@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_email_code" >
         <action
             android:id="@+id/back_to_email"
-            app:destination="@id/authFragment2" />
+            app:destination="@id/authFragment" />
         <action
             android:id="@+id/to_create_passcode"
             app:destination="@id/createPassCodeFragment" />

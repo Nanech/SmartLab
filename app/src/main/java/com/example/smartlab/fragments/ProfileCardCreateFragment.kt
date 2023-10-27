@@ -125,6 +125,12 @@ class ProfileCardCreateFragment : Fragment() {
                     Log.d("Response Body", response.body().toString() )
                     Log.d("Response Code", response.code().toString() )
                     Log.d("Response Message", response.message().toString() )
+
+                    // Need transition on Next Activity
+
+                    val intent = Intent(activity, MediatorActivity::class.java)
+                    startActivity(intent)
+
                 }else{
                     Toast.makeText(requireContext(), "${response.code()}", Toast.LENGTH_LONG).show()
                     Log.d("Response error", response.code().toString())
@@ -264,11 +270,7 @@ class ProfileCardCreateFragment : Fragment() {
                 checkForAllFields()
             }
         } )
-
-
-
     }
-
 
     private fun updateLabel(calender: Calendar){
         val dateFormat = SimpleDateFormat("dd LLLL yyyy", Locale.getDefault())
